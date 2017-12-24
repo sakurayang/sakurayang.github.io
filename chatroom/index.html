@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Chatroom
+        </title>
+        <style>
+        </style>
+        <script src="https://cdn.wilddog.com/sdk/js/2.5.17/wilddog.js">
+        </script>
+        <script src="../js/jquery-3.2.1.min.js">
+        </script>
+        <script>
+            var user = user;
+            var t = new Date();
+            var day = t.getDate();
+            var time_h = t.getHours();
+            var time_m = t.getMinutes();
+            var time_s = t.getSeconds();
+            if (time_h.length < 1) {
+                //如果不足2位，补0
+                var time_hh = "0" + time_h;
+            }
+            else {
+                var time_hh = time_h}
+            if (time_m.length < 1) {
+                var time_mm = "0" + time_h;
+            }
+            else {
+                var time_mm = time_m}
+            if (time_s.length < 1) {
+                var time_ss = "0" + time_h;
+            }
+            else {
+                var time_ss = time_s}
+            if (day.length < 1) {
+                var time_dd = "0" + day;
+            }
+            else {
+                var time_dd = day}
+            var time = time_hh + ":" + time_mm + ":" + time_ss;
+            var config = {
+                //authDomain: "wd6413466545jrbfqv.wilddogio.com",
+                syncURL: "https://wd6413466545jrbfqv.wilddogio.com" //输入节点 URL
+            };
+            wilddog.initializeApp(config);
+            var ref = wilddog.sync().ref();
+            wilddog.initializeApp(config);
+            var ref = wilddog.sync().ref();
+            var text = $("#user").val();
+            // 获取输入框的数据           
+            ref.child('user').set(text);
+            // 将数据写到云端 user 节点下，child 用来定位子节点
+                        function setCookie(c_name,value,expiredays)
+            {
+                var exdate=new Date();
+                exdate.setDate(exdate.getDate()+expiredays);
+                document.cookie=c_name+ "=" +escape(value)+
+                    ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+                //当expiredays = 0 时，为"" 否则就是exdate的GMT格式字符串
+            }
+            function getCookie(c_name)
+            {
+                if (document.cookie.length>0)
+                {
+                    c_start=document.cookie.indexOf(c_name + "=")
+                    if (c_start!=-1)
+                    {
+                        c_start=c_start + c_name.length+1 
+                        c_end=document.cookie.indexOf(";",c_start)
+                        if (c_end==-1) c_end=document.cookie.length
+                        return unescape(document.cookie.substring(c_start,c_end))
+                    }
+                }
+                return ""
+            }
+            function checkCookie()
+            {
+                username=getCookie('username')
+                if (username!=null && username!="")
+                {
+                    tip(username);
+                }
+                else 
+                {
+                    username=prompt('Please enter your name:',"")
+                    if (username!=null && username!="")
+                    {
+                        setCookie('username',username,365)
+                    }
+                }
+            }
+            function tip(name) {
+            }
+        </script>
+    </head>
+    <body onLoad="checkCookie()">
+        <from id="username" action="./chat.html" target="_self" method="POST">
+            <input type="text" defaultValue="anymous" class="textInput" id="user">
+            <input type="submit" value="Link&#9734;Start" class="button" id="subject">
+        </from>
+    </body>
+</html>
