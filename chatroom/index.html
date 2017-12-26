@@ -1,14 +1,14 @@
 <!doctype html>
-<html>
+<html lang="zh">
     <head>
-        <title>Chatroom
-        </title>
+        <title>Chatroom</title>
         <style>
         </style>
-        <script src="https://cdn.wilddog.com/sdk/js/2.5.17/wilddog.js">
-        </script>
-        <script src="../js/jquery-3.2.1.min.js">
-        </script>
+		<meta charset="utf-8" />
+        <!--<script src="https://cdn.wilddog.com/sdk/js/2.5.17/wilddog.js"></script>-->
+        <script src="../js/jquery-3.2.1.min.js"></script>
+
+		<script src="../js/jquery.xcolor.min.js"></script>
         <script>
             var user = user;
             var t = new Date();
@@ -38,7 +38,7 @@
             else {
                 var time_dd = day}
             var time = time_hh + ":" + time_mm + ":" + time_ss;
-            var config = {
+/*            var config = {
                 //authDomain: "wd6413466545jrbfqv.wilddogio.com",
                 syncURL: "https://wd6413466545jrbfqv.wilddogio.com" //输入节点 URL
             };
@@ -50,7 +50,7 @@
             // 获取输入框的数据           
             ref.child('user').set(text);
             // 将数据写到云端 user 节点下，child 用来定位子节点
-                        function setCookie(c_name,value,expiredays)
+            function setCookie(c_name,value,expiredays)
             {
                 var exdate=new Date();
                 exdate.setDate(exdate.getDate()+expiredays);
@@ -78,7 +78,7 @@
                 username=getCookie('username')
                 if (username!=null && username!="")
                 {
-                    tip(username);
+                    tip(username,green);
                 }
                 else 
                 {
@@ -88,15 +88,34 @@
                         setCookie('username',username,365)
                     }
                 }
-            }
-            function tip(name) {
-            }
+            }*/
+			function tip(text,color) 
+			{
+				var tipBox = document.getElementById("tipBox");
+				var tipit=$("#tipBox");
+				tipBox.innerHTML ="<br/>" + text + "<br/><br/>" ;
+				$("#tipBox").css({
+					backgroundColor:color,
+					fontSize:"30px",
+					marginLeft:"40%",
+					marginRight:"40%",
+					marginTop:"0%",
+					marginBottom:"5%",
+					textAlign:"center",
+				});
+			}
         </script>
     </head>
-    <body onLoad="checkCookie()">
-        <from id="username" action="./chat.html" target="_self" method="POST">
+    <!--<body onLoad="checkCookie()">-->
+	<body>
+		<center>
+        <form id="username" action="./chat.html" target="_self" method="POST">
             <input type="text" defaultValue="anymous" class="textInput" id="user">
+			<br/>
             <input type="submit" value="Link&#9734;Start" class="button" id="subject">
-        </from>
+        </form>
+		</center>
+		<br/>
+		<div id="tipBox"></div>
     </body>
 </html>
