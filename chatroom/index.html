@@ -2,12 +2,9 @@
 <html lang="zh">
     <head>
         <title>Chatroom</title>
-        <style>
-        </style>
 		<meta charset="utf-8" />
-        <!--<script src="https://cdn.wilddog.com/sdk/js/2.5.17/wilddog.js"></script>-->
+    <!--    <script src="https://cdn.wilddog.com/sdk/js/2.5.17/wilddog.js"></script>-->
         <script src="../js/jquery-3.2.1.min.js"></script>
-
 		<script src="../js/jquery.xcolor.min.js"></script>
         <script>
             var user = user;
@@ -16,29 +13,14 @@
             var time_h = t.getHours();
             var time_m = t.getMinutes();
             var time_s = t.getSeconds();
-            if (time_h.length < 1) {
-                //如果不足2位，补0
-                var time_hh = "0" + time_h;
-            }
-            else {
-                var time_hh = time_h}
-            if (time_m.length < 1) {
-                var time_mm = "0" + time_h;
-            }
-            else {
-                var time_mm = time_m}
-            if (time_s.length < 1) {
-                var time_ss = "0" + time_h;
-            }
-            else {
-                var time_ss = time_s}
-            if (day.length < 1) {
-                var time_dd = "0" + day;
-            }
-            else {
-                var time_dd = day}
+			
+            if (time_h.length < 1) {/*如果不足2位，补0*/var time_hh = "0" + time_h;}else {var time_hh = time_h}
+            if (time_m.length < 1) {var time_mm = "0" + time_h;}else {var time_mm = time_m}
+            if (time_s.length < 1) {var time_ss = "0" + time_h;}else {var time_ss = time_s}
+            if (day.length < 1) {var time_dd = "0" + day;}else {var time_dd = day}
+				
             var time = time_hh + ":" + time_mm + ":" + time_ss;
-/*            var config = {
+            /*var config = {
                 //authDomain: "wd6413466545jrbfqv.wilddogio.com",
                 syncURL: "https://wd6413466545jrbfqv.wilddogio.com" //输入节点 URL
             };
@@ -78,7 +60,7 @@
                 username=getCookie('username')
                 if (username!=null && username!="")
                 {
-                    tip(username,green);
+                    tip(username + "" + "Link!!!!",green);
                 }
                 else 
                 {
@@ -102,14 +84,32 @@
 					marginTop:"0%",
 					marginBottom:"5%",
 					textAlign:"center",
+					
 				});
+				 
 			}
+			$(".button").click(function(){
+					tipit.animate({
+						opacity:"1",
+					});
+				});
         </script>
+		<style>
+			#tip {
+				animation-name: move;
+				animation-duration: 300ms;
+				animation-timing-function: ease-in-out;
+				-webkit-animation-timing-function: ease-in-out;
+				-webkit-animation-name: move;
+				-webkit-animation-duration: 300ms;
+				opacity: 0;
+			}
+		</style>
     </head>
     <!--<body onLoad="checkCookie()">-->
 	<body>
 		<center>
-        <form id="username" action="./chat.html" target="_self" method="POST">
+        <form id="username" aaction="./chat.html" target="_self" method="POST">
             <input type="text" defaultValue="anymous" class="textInput" id="user">
 			<br/>
             <input type="submit" value="Link&#9734;Start" class="button" id="subject">
