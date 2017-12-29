@@ -3,76 +3,25 @@
     <head>
         <title>Chatroom</title>
 		<meta charset="utf-8" />
-    <!--    <script src="https://cdn.wilddog.com/sdk/js/2.5.17/wilddog.js"></script>-->
         <script src="../js/jquery-3.2.1.min.js"></script>
 		<script src="../js/jquery.xcolor.min.js"></script>
         <script>
-            var user = user;
+            
             var t = new Date();
             var day = t.getDate();
             var time_h = t.getHours();
             var time_m = t.getMinutes();
             var time_s = t.getSeconds();
+			var username = $(".textInput").val();
 			
-            if (time_h.length < 1) {/*如果不足2位，补0*/var time_hh = "0" + time_h;}else {var time_hh = time_h}
-            if (time_m.length < 1) {var time_mm = "0" + time_h;}else {var time_mm = time_m}
-            if (time_s.length < 1) {var time_ss = "0" + time_h;}else {var time_ss = time_s}
-            if (day.length < 1) {var time_dd = "0" + day;}else {var time_dd = day}
+            (time_h.length < 1) ? time_hh = "0" + time_h : time_hh = time_h;/*如果不足2位，补0*/
+            (time_m.length < 1) ? time_mm = "0" + time_m : time_mm = time_m;
+            (time_s.length < 1) ? time_ss = "0" + time_s : time_ss = time_s;
+            (day.length < 1) ? time_dd = "0" + day : time_dd = day;
 				
             var time = time_hh + ":" + time_mm + ":" + time_ss;
-            /*var config = {
-                //authDomain: "wd6413466545jrbfqv.wilddogio.com",
-                syncURL: "https://wd6413466545jrbfqv.wilddogio.com" //输入节点 URL
-            };
-            wilddog.initializeApp(config);
-            var ref = wilddog.sync().ref();
-            wilddog.initializeApp(config);
-            var ref = wilddog.sync().ref();
-            var text = $("#user").val();
-            // 获取输入框的数据           
-            ref.child('user').set(text);
-            // 将数据写到云端 user 节点下，child 用来定位子节点
-            function setCookie(c_name,value,expiredays)
-            {
-                var exdate=new Date();
-                exdate.setDate(exdate.getDate()+expiredays);
-                document.cookie=c_name+ "=" +escape(value)+
-                    ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
-                //当expiredays = 0 时，为"" 否则就是exdate的GMT格式字符串
-            }
-            function getCookie(c_name)
-            {
-                if (document.cookie.length>0)
-                {
-                    c_start=document.cookie.indexOf(c_name + "=")
-                    if (c_start!=-1)
-                    {
-                        c_start=c_start + c_name.length+1 
-                        c_end=document.cookie.indexOf(";",c_start)
-                        if (c_end==-1) c_end=document.cookie.length
-                        return unescape(document.cookie.substring(c_start,c_end))
-                    }
-                }
-                return ""
-            }
-            function checkCookie()
-            {
-                username=getCookie('username')
-                if (username!=null && username!="")
-                {
-                    tip(username + "" + "Link!!!!",green);
-                }
-                else 
-                {
-                    username=prompt('Please enter your name:',"")
-                    if (username!=null && username!="")
-                    {
-                        setCookie('username',username,365)
-                    }
-                }
-            }*/
-			function tip(text,color) 
-			{
+			
+			function tip(text,color) {
 				var tipBox = document.getElementById("tipBox");
 				var tipit=$("#tipBox");
 				tipBox.innerHTML ="<br/>" + text + "<br/><br/>" ;
@@ -84,33 +33,73 @@
 					marginTop:"0%",
 					marginBottom:"5%",
 					textAlign:"center",
-					
+					opacity:"0",
 				});
-				 
+				tipit.animate({
+					opacity:"0.8",
+					bottom:"100px",
+				},"slow");
 			}
-			$(".button").click(function(){
-					tipit.animate({
-						opacity:"1",
-					});
-				});
         </script>
 		<style>
-			#tip {
-				animation-name: move;
-				animation-duration: 300ms;
-				animation-timing-function: ease-in-out;
-				-webkit-animation-timing-function: ease-in-out;
-				-webkit-animation-name: move;
-				-webkit-animation-duration: 300ms;
-				opacity: 0;
+			form {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-webkit-transform: translate(-50%, -50%);
+				-moz-transform: translate(-50%, -50%);
+				-ms-transform: translate(-50%, -50%);
+				-o-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);				
 			}
+			
+			.textInput {
+				color: #bdae9d;
+				background-color: #2a211c;
+				border: none;
+				float: left;
+				width: 200px;
+				font-size: 12px;
+				overflow: hidden;
+				height: 32px;
+				line-height: 32px;
+				padding: 0 12px;
+				border: 0;
+				-webkit-box-shadow: none;
+				box-shadow: none;
+			}
+			
+			.button {
+				width: 100%;
+				height: 30px;
+				font-size: 20px;
+				color: #bdae9d;
+				background-color: #2a211c;
+				border: none;
+				animation-duration: 600ms;
+				-webkit-animation-duration: 600ms;
+				-o-animation-duration: 600ms;
+				-moz-animation-duration: 600ms;
+			}
+			.button:hover {
+				color: #2a211c;
+				background-color: #bdae9d;
+				animation-duration: 600ms;				
+				-webkit-animation-duration: 600ms;
+				-o-animation-duration: 600ms;
+				-moz-animation-duration: 600ms;
+			}
+			
+			body{
+				background-color: #2a211c;
+			}
+			
 		</style>
     </head>
-    <!--<body onLoad="checkCookie()">-->
 	<body>
 		<center>
-        <form id="username" aaction="./chat.html" target="_self" method="POST">
-            <input type="text" defaultValue="anymous" class="textInput" id="user">
+        <form id="username" action="./chat.html" target="_self" method="POST">
+            <input type="text" defaultValue="anonymous" class="textInput" id="user" placeholder="用户名">
 			<br/>
             <input type="submit" value="Link&#9734;Start" class="button" id="subject">
         </form>
