@@ -5,8 +5,8 @@
 		<meta charset="utf-8" />
         <script src="../js/jquery-3.2.1.min.js"></script>
 		<script src="../js/jquery.xcolor.min.js"></script>
+		<script src="https://cdn.wilddog.com/sdk/js/2.5.17/wilddog.js"></script>
         <script>
-            
             var t = new Date();
             var day = t.getDate();
             var time_h = t.getHours();
@@ -40,6 +40,38 @@
 					bottom:"100px",
 				},"slow");
 			}
+			
+			var config = {
+				authDomain: "https://wd6413466545jrbfqv.wilddogio.com",
+				syncURL: "https://wd6413466545jrbfqv.wilddogio.com"};
+			wilddog.initializeApp(config);
+			var ref = wilddog.sync().ref("/web/chat/users");
+			
+			// 创建一个用户， 如果用户已经存在，那退出
+			var userRef = wilddog.sync().ref("/users/" + username);
+			
+			userRef.transaction(
+				function(currentData) {
+					if (currentData === null) {
+						return { name: username} 
+					}
+					else {
+						console.log(username + 'is exist.');
+						return; // 退出
+					}
+				}
+			).then(function(result) {
+				if (!result.committed) {
+					console.log('用户名已存在');
+				} 
+				else {
+					console.log('成功');
+				}
+				console.log(username + "'s data: ", result.snapshot.val());
+			}
+			).catch(function(err){
+				console.log('transaction failed.', error);
+			});
         </script>
 		<style>
 			form {
@@ -53,20 +85,49 @@
 				transform: translate(-50%, -50%);				
 			}
 			
+			@keyframes text {
+				0% {
+					text-indent: 30%;
+					font-size: 25px;
+				}
+				100% {
+					text-indent: 0%;
+					font-size: 18px;
+				}
+			}
+			@keyframes button {
+				0% {
+					opacity: 0;
+					background-color: #2a211c;
+				}
+				100% {
+					opacity: 1;
+					background-color: #bdae9d;
+				}
+			}
+			
 			.textInput {
 				color: #bdae9d;
 				background-color: #2a211c;
 				border: none;
 				float: left;
 				width: 200px;
-				font-size: 12px;
 				overflow: hidden;
 				height: 32px;
 				line-height: 32px;
-				padding: 0 12px;
-				border: 0;
-				-webkit-box-shadow: none;
 				box-shadow: none;
+				text-indent: 30%;
+				font-size: 25px;
+				animate-name: text;
+				animation-duration: 600ms;
+				animation-direction: alternate;
+			}
+			.textInput:focus {
+				font-size: 18px;
+				text-indent: 0%;
+				animation-name: text;
+				animation-duration: 600ms;
+				animation-direction: alternate;
 			}
 			
 			.button {
@@ -76,18 +137,15 @@
 				color: #bdae9d;
 				background-color: #2a211c;
 				border: none;
+				animate-name: button;
 				animation-duration: 600ms;
-				-webkit-animation-duration: 600ms;
-				-o-animation-duration: 600ms;
-				-moz-animation-duration: 600ms;
+
 			}
 			.button:hover {
 				color: #2a211c;
 				background-color: #bdae9d;
+				animate-name: button;
 				animation-duration: 600ms;				
-				-webkit-animation-duration: 600ms;
-				-o-animation-duration: 600ms;
-				-moz-animation-duration: 600ms;
 			}
 			
 			body{
@@ -99,7 +157,7 @@
 	<body>
 		<center>
         <form id="username" action="./chat.html" target="_self" method="POST">
-            <input type="text" defaultValue="anonymous" class="textInput" id="user" placeholder="用户名">
+            <input type="text" class="textInput" id="user" placeholder="用户名">
 			<br/>
             <input type="submit" value="Link&#9734;Start" class="button" id="subject">
         </form>
