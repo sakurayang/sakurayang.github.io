@@ -41,6 +41,40 @@
 					bottom:"100px",
 				},"slow");
 			}
+			
+			var config = {
+				authDomain: "https://wd6413466545jrbfqv.wilddogio.com",
+				syncURL: "https://wd6413466545jrbfqv.wilddogio.com"};
+			wilddog.initializeApp(config);
+			var ref = wilddog.sync().ref("/web/chat/users");
+			
+			function login (user_name){
+				// 创建一个用户， 如果用户已经存在，那退出
+				var userRef = wilddog.sync().ref("/users/" + user_name);
+			
+				userRef.transaction(
+					function(currentData) {
+						if (currentData === null) {
+							return { name: username} 
+						}
+						else {
+							console.log(username + 'is exist.');
+							return; // 退出
+						}
+					}
+				).then(function(result) {
+					if (!result.committed) {
+						console.log('用户名已存在');
+					} 
+					else {
+						console.log('成功');
+					}
+					console.log(username + "'s data: ", result.snapshot.val());
+				}
+				).catch(function(err){
+					console.log('transaction failed.', error);
+				});
+			}
         </script>
     </head>
 </html>
