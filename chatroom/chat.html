@@ -50,8 +50,8 @@
 			
 			function login (user_name){
 				// 创建一个用户， 如果用户已经存在，那退出
-				var userRef = wilddog.sync().ref("/users/" + user_name);
-			
+				//var userRef = wilddog.sync().ref("/users/" + user_name);
+				/*var userRef = wilddog.sync().ref();
 				userRef.transaction(
 					function(currentData) {
 						if (currentData === null) {
@@ -73,7 +73,8 @@
 				}
 				).catch(function(err){
 					console.log('transaction failed.', error);
-				});
+				});*/
+				
 			}
         </script>
     </head>
