@@ -1,85 +1,68 @@
 <!doctype html>
 <html lang="zh">
     <head>
-       <title>Chatroom</title>
+       <title>Chatroom--help</title>
 		<meta charset="utf-8" />
        <script src="../js/jquery-3.2.1.min.js"></script>
-		<script src="../js/jquery.xcolor.min.js"></script>
-        <script>
-            var t = new Date();
-            var day = t.getDate();
-            var time_h = t.getHours();
-            var time_m = t.getMinutes();
-            var time_s = t.getSeconds();
-			var username = $(".textInput").val();
+	   <script>
+			window.addEventListener("load", function() {
+				console.time("load");
+				console.log("Js loaded");
+				window.status="Loading.......";
+				console.log("Page loading");
+				document.title = 'Chatroom--help';
+				console.log("change Title");
+            });
 			
-            (time_h.length < 1) ? time_hh = "0" + time_h : time_hh = time_h;/*如果不足2位，补0*/
-            (time_m.length < 1) ? time_mm = "0" + time_m : time_mm = time_m;
-            (time_s.length < 1) ? time_ss = "0" + time_s : time_ss = time_s;
-            (day.length < 1) ? time_dd = "0" + day : time_dd = day;
-				
-            var time = time_hh + ":" + time_mm + ":" + time_ss;
-			
-			function tip(text,color) {
-				var tipBox = document.getElementById("tipBox");
-				var tipit=$("#tipBox");
-				tipBox.innerHTML ="<br/>" + text + "<br/><br/>" ;
-				$("#tipBox").css({
-					backgroundColor:color,
-					fontSize:"30px",
-					marginLeft:"40%",
-					marginRight:"40%",
-					marginTop:"0%",
-					marginBottom:"5%",
-					textAlign:"center",
-					opacity:"0",
-				});
-				tipit.animate({
-					opacity:"0.8",
-					bottom:"100px",
-				},"slow");
+			function loading() {
+			window.status="page loade finish!";
+			console.log("page load finish!");
+			console.timeEnd("load");
 			}
-        </script>
+			
+	   </script>
 		<style>
-			.POST {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				-webkit-transform: translate(-50%, -50%);
-				-moz-transform: translate(-50%, -50%);
-				-ms-transform: translate(-50%, -50%);
-				-o-transform: translate(-50%, -50%);
-				transform: translate(-50%, -50%);
-				width: 15%;
-			}
-			
-			
 			.button {
-				width: 100%;
-				height: 30px;
-				font-size: 20px;
+				height: 20px;
+				font-size: 15px;
 				color: #bdae9d;
 				background-color: #2a211c;
 				border: none;
 			}
 			.button:hover {
 				color: #2a211c;
-				background-color: #bdae9d;			
+				background-color: #bdae9d;	
 			}
 			
 			body{
 				background-color: #2a211c;
-			}	
+				color: #bdae9d;
+			}
+			
+			.title {
+				text-align: center;
+				color: #bdae9d;
+			}
+			
+			.text{
+				margin-left: 10%;
+				margin-right: 10%;
+			}
+			
+			src{
+				background-color: black;
+				color: green;
+			}
 		</style>
     </head>
-	<body>
-		<center>
-			<div class="POST">
-				<input type="button" value="Link&#9734;Start" class="button" id="subject" onclick="window.open('./chat.html')">
-				<input type="button" value="Help" class="button" id="subject" onclick="window.open('./help.html')">
-			</div>
-		</center>
-		<br/>
-		<div id="tipBox"></div>
+	<body onload="loading()">
+		<input type="button" value="返回主页" class="button" onclick="window.open('./index.html')">
+		<input type="button" value="返回聊天" class="button" onclick="window.open('./chat.html')">
+		<br />
+		<h1 class="title">怎么玩？</h1>
+		<div class="text">
+		<q><em><small>本聊天室要求用户会用控制台，不眼盲，不遗漏双引号及括号</small></em></q><br />
+		你可以在控制台使用<src>help()</src>或<src>help("命令")</src>来查看使用方法
+		</div>
     </body>
 </html>
