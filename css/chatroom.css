@@ -1,0 +1,31 @@
+.button {
+	width: 100%;
+	height: 30px;
+	font-size: 20px;
+	color: #bdae9d;
+	background-color: #2a211c;
+	border: none;
+	}
+.button:hover {
+	color: #2a211c;
+	background-color: #bdae9d;			
+	}
+			
+body{
+	background-color: #2a211c;
+	}
+	
+.title {
+	text-align: center;
+	color: #bdae9d;
+	}
+			
+.text{
+	margin-left: 10%;
+	margin-right: 10%;
+	}
+			
+.src{
+	background-color: black;
+	color: green;
+	}
