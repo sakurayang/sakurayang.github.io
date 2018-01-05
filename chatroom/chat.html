@@ -13,7 +13,6 @@
             var time_h = t.getHours();
             var time_m = t.getMinutes();
             var time_s = t.getSeconds();
-			var username = $(".textInput").val();
 			
             (time_h.length < 1) ? time_hh = "0" + time_h : time_hh = time_h;/*如果不足2位，补0*/
             (time_m.length < 1) ? time_mm = "0" + time_m : time_mm = time_m;
@@ -43,39 +42,60 @@
 			}
 			
 			var config = {
-				authDomain: "https://wd6413466545jrbfqv.wilddogio.com",
+				authDomain: "https://wd6413466545jrbfqv.wilddog.com",
 				syncURL: "https://wd6413466545jrbfqv.wilddogio.com"};
 			wilddog.initializeApp(config);
-			var ref = wilddog.sync().ref("/web/chat/users");
+			var msg = wilddog.sync().ref("/chat");
 			
-			function login (user_name){
-				// 创建一个用户， 如果用户已经存在，那退出
-				//var userRef = wilddog.sync().ref("/users/" + user_name);
-				/*var userRef = wilddog.sync().ref();
-				userRef.transaction(
-					function(currentData) {
-						if (currentData === null) {
-							return { name: username} 
-						}
-						else {
-							console.log(username + 'is exist.');
-							return; // 退出
+			function reg(username) {
+				var userRoot = wilddog.sync().ref();
+				userRoot.once("value")
+					.then(function(snapshot) {
+						var name = snapshot.child("/users/"+username).exists();
+						if (name == false) {
+							userRoot.child("users").set(username);
+							userRoot.child("users/"+username).set({"name":username,"regTime":time})
+						} else {
+							console.error("'" +username+"'已经存在")
 						}
 					}
-				).then(function(result) {
-					if (!result.committed) {
-						console.log('用户名已存在');
-					} 
-					else {
-						console.log('成功');
-					}
-					console.log(username + "'s data: ", result.snapshot.val());
-				}
-				).catch(function(err){
-					console.log('transaction failed.', error);
-				});*/
-				
+				);
 			}
+			
+			function log(username) {
+				var userRoot = wilddog.sync().ref();
+				userRoot.once("value")
+					.then(function(snapshot) {
+						var name = snapshot.child("/users/"+username).exists();
+						if (name == false) {
+							console.error("'" +username+"'未注册，请用reg('"+username+"')来注册")
+						} else {
+							window.username = username;
+						}
+					}
+				);
+			}
+			
+			function msg(message,type) {
+				switch (type) {
+					case url:
+						var msgtype = url;
+						break;
+					case text:
+						var msgtype = text;
+						break;
+					case img:
+						var msgtype = image;
+						break;
+					default:
+						var msgtype = text;
+						break;
+				}
+				
+			
+			}
+			
+			
         </script>
 		<style>
 			@import url(../css/chatroom.css);
