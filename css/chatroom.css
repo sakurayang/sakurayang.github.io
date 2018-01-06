@@ -13,11 +13,13 @@
 			
 body{
 	background-color: #2a211c;
+	word-wrap: break-word;
 	}
 	
 .title {
 	text-align: center;
 	color: #bdae9d;
+	margin:0%;
 	}
 			
 .text{
