@@ -7,12 +7,12 @@
         <script src="../js/jquery-3.2.1.min.js"></script>
 		<script src="../js/jquery.xcolor.min.js"></script>
         <script>
-            var infomsg = "本站仍在搭建中，功能实现进度：\nX 登陆注册\nO help()\nO 聊天\nO 登陆密码";
+            var infomsg = "本站仍在搭建中，功能实现进度：\nX 登陆注册\nO help()\nX 聊天\nO 登陆密码\nO 发送图片";
             var text = "text";
 			var url = "url";
 			var img = "img";
 			var username;
-			var chatBox = $(".chatmsg");
+			
 			function getTime() {
 				var t = new Date();
 				var time_h = t.getHours();
@@ -113,49 +113,60 @@
 					tip("未登录","red");
 					return console.warn("消息未发送");
 				} else {
-					chat.push({"message":message,"type":msgtype,"sendBy":username,"time":getTime()});
+					chat.push({"message":message,"type":msgtype,"sendBy":username,"sendTime":getTime()});
 					return console.info("消息已发送");
 				}
-				
+			}	
+			
 			function loaded() {
+				var chatBox = $(".chatmsg");
 				if (getTime() == "00:00:00"){
 					chat.remove();
 				}
-				chat.on("child_added",function(snapshot) {
-						var text = snapshot.val().message;
-						var user = snapshot.val().sendBy;
-						var sendTime = snapshot.val().time;
-						var type = snapshot.val().type;
-						console.log("type:"+type+" '"+text+"' "+"sendBy '"+user+"' "+"at '"+sendTime+"'");
-						chatBox.append("<div><span style='color:grey'>"+sendTime+"</span><em style='color:white;'>"+user+"</em><b>>_</b>"+text+"</div><br />");
-					}
-				);
-			}
 			}
 			
-			function() run {
-				chat.on("value",function(snapshot) {
+			
+			function run() {
+				chat.on("child_added",function(snapshot) {
+					var chatBox = $(".chatmsg");
 					var text = snapshot.val().message;
 					var user = snapshot.val().sendBy;
-					var sendTime = snapshot.val().time;
+					var sendTime = snapshot.val().sendTime;
 					var type = snapshot.val().type;
 					console.log("type:"+type+" '"+text+"' "+"sendBy '"+user+"' "+"at '"+sendTime+"'");
+					chatBox.append("<div class='msg'><span style='color:grey' class='time'>"+sendTime+"&nbsp;&nbsp;</span><span style='color:white;'>"+user+"</span><b style='color:grey;'>>_&nbsp;</b><span class='msg'>"+text+"</span></div>");
 				}
 				);
 			}
         </script>
 		<style>
 			@import url(../css/chatroom.css);
+			body {
+				color: #bdae9d;
+			}
+			div.msg {
+				margin-top: 0%;
+				margin-bottom: 0%;
+			}
+			span.msg {
+				font-size: 20px;
+				
+			}
+			.time{
+				font-size: 10px;
+				
+				
+			}
 		</style>
     </head>
-	<body>
+	<body onload="loaded()">
 	<div id="tipBox"></div>
 	<h1 class="title">预留</h1>
 	<hr />
 	<br />
 	<div class="chatmsg"></div>
 	<script>
-		$(document).ready(loaded());
+		$(document).ready(function (){run();});
 	</script>
 	</body>
 </html>
