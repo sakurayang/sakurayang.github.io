@@ -7,45 +7,58 @@
         <script src="../js/jquery-3.2.1.min.js"></script>
 		<script src="../js/jquery.xcolor.min.js"></script>
         <script>
-            
-            var t = new Date();
-            var day = t.getDate();
-            var time_h = t.getHours();
-            var time_m = t.getMinutes();
-            var time_s = t.getSeconds();
-			
-            (time_h.length < 1) ? time_hh = "0" + time_h : time_hh = time_h;/*如果不足2位，补0*/
-            (time_m.length < 1) ? time_mm = "0" + time_m : time_mm = time_m;
-            (time_s.length < 1) ? time_ss = "0" + time_s : time_ss = time_s;
-            (day.length < 1) ? time_dd = "0" + day : time_dd = day;
-				
-            var time = time_hh + ":" + time_mm + ":" + time_ss;
-			
+            var infomsg = "本站仍在搭建中，功能实现进度：\nX 登陆注册\nO help()\nO 聊天\nO 登陆密码";
+            var text = "text";
+			var url = "url";
+			var img = "img";
+			var username;
+			var chatBox = $(".chatmsg");
+			function getTime() {
+				var t = new Date();
+				var time_h = t.getHours();
+				var time_m = t.getMinutes();
+				var time_s = t.getSeconds();
+				(time_h.toString().length == 1) ? time_hh = "0" + time_h.toString() : time_hh = time_h.toString();/*如果不足2位，补0*/
+				(time_m.toString().length == 1) ? time_mm = "0" + time_m.toString() : time_mm = time_m.toString();
+				(time_s.toString().length == 1) ? time_ss = "0" + time_s.toString() : time_ss = time_s.toString();
+				var time = time_hh + ":" + time_mm + ":" + time_ss;
+				return time;
+			}
 			function tip(text,color) {
 				var tipBox = document.getElementById("tipBox");
 				var tipit=$("#tipBox");
-				tipBox.innerHTML ="<br/>" + text + "<br/><br/>" ;
+				tipBox.innerHTML =text ;
 				$("#tipBox").css({
 					backgroundColor:color,
 					fontSize:"30px",
-					marginLeft:"40%",
-					marginRight:"40%",
-					marginTop:"0%",
-					marginBottom:"5%",
+					top:"80%",
 					textAlign:"center",
 					opacity:"0",
+					width:"100%",
+					position:"absolute",
+					zIndex:"999999",
 				});
 				tipit.animate({
 					opacity:"0.8",
-					bottom:"100px",
-				},"slow");
+				},700);
+				tipit.animate({
+					opacity:"0.8",
+				},2000);
+				tipit.animate({
+					opacity:"0.8",
+				},2000);
+				tipit.animate({
+					opacity:"0",
+					display:"none",
+					zIndex:"-1",
+				},700);
 			}
 			
 			var config = {
 				authDomain: "https://wd6413466545jrbfqv.wilddog.com",
 				syncURL: "https://wd6413466545jrbfqv.wilddogio.com"};
 			wilddog.initializeApp(config);
-			var msg = wilddog.sync().ref("/chat");
+			var chat = wilddog.sync().ref("/chat");
 			
 			function reg(username) {
 				var userRoot = wilddog.sync().ref();
@@ -53,8 +66,7 @@
 					.then(function(snapshot) {
 						var name = snapshot.child("/users/"+username).exists();
 						if (name == false) {
-							userRoot.child("users").set(username);
-							userRoot.child("users/"+username).set({"name":username,"regTime":time})
+							userRoot.child("users/"+username).set({"name":username,"regTime":new Date().toString(),"LastLogin":getTime()})
 						} else {
 							console.error("'" +username+"'已经存在")
 						}
@@ -62,15 +74,20 @@
 				);
 			}
 			
-			function log(username) {
+			function login(username) {
 				var userRoot = wilddog.sync().ref();
 				userRoot.once("value")
 					.then(function(snapshot) {
 						var name = snapshot.child("/users/"+username).exists();
 						if (name == false) {
 							console.error("'" +username+"'未注册，请用reg('"+username+"')来注册")
+							tip("未注册","red");
 						} else {
 							window.username = username;
+							console.log(""+username+":现在是"+getTime()+",祝你玩得开心");
+							console.info(infomsg);
+							userRoot.child("users/"+username).update({"LastLogin":getTime()});
+							tip(""+username+":现在是"+getTime()+",祝你玩得开心","#00ff40");
 						}
 					}
 				);
@@ -85,20 +102,60 @@
 						var msgtype = text;
 						break;
 					case img:
-						var msgtype = image;
+						var msgtype = img;
 						break;
 					default:
 						var msgtype = text;
 						break;
 				}
+				if (username == null) {
+					console.error("未登录，请用login('用户名')来登录");
+					tip("未登录","red");
+					return console.warn("消息未发送");
+				} else {
+					chat.push({"message":message,"type":msgtype,"sendBy":username,"time":getTime()});
+					return console.info("消息已发送");
+				}
 				
-			
+			function loaded() {
+				if (getTime() == "00:00:00"){
+					chat.remove();
+				}
+				chat.on("child_added",function(snapshot) {
+						var text = snapshot.val().message;
+						var user = snapshot.val().sendBy;
+						var sendTime = snapshot.val().time;
+						var type = snapshot.val().type;
+						console.log("type:"+type+" '"+text+"' "+"sendBy '"+user+"' "+"at '"+sendTime+"'");
+						chatBox.append("<div><span style='color:grey'>"+sendTime+"</span><em style='color:white;'>"+user+"</em><b>>_</b>"+text+"</div><br />");
+					}
+				);
+			}
 			}
 			
-			
+			function() run {
+				chat.on("value",function(snapshot) {
+					var text = snapshot.val().message;
+					var user = snapshot.val().sendBy;
+					var sendTime = snapshot.val().time;
+					var type = snapshot.val().type;
+					console.log("type:"+type+" '"+text+"' "+"sendBy '"+user+"' "+"at '"+sendTime+"'");
+				}
+				);
+			}
         </script>
 		<style>
 			@import url(../css/chatroom.css);
 		</style>
     </head>
+	<body>
+	<div id="tipBox"></div>
+	<h1 class="title">预留</h1>
+	<hr />
+	<br />
+	<div class="chatmsg"></div>
+	<script>
+		$(document).ready(loaded());
+	</script>
+	</body>
 </html>
