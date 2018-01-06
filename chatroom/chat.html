@@ -3,15 +3,26 @@
     <head>
         <title>Chatroom</title>
 		<meta charset="utf-8" />
-		<script src="https://cdn.wilddog.com/sdk/js/2.5.17/wilddog.js"></script>
-        <script src="../js/jquery-3.2.1.min.js"></script>
-		<script src="../js/jquery.xcolor.min.js"></script>
+		<script type="text/javascript" src="https://cdn.wilddog.com/sdk/js/2.5.17/wilddog.js"></script>
+        <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../js/help.js"></script>
+		<script type="text/javascript" src="../js/crypto-js/crypto-js.js"></script>
         <script>
-            var infomsg = "本站仍在搭建中，功能实现进度：\nX 登陆注册\nO help()\nX 聊天\nO 登陆密码\nO 发送图片";
+            var infomsg = "本站仍在搭建中，功能实现进度：\nX 登陆注册\nO help()\nX 聊天\nO 登陆密码\nX 发送图片";
             var text = "text";
 			var url = "url";
 			var img = "img";
 			var username;
+			
+			function clearMsg(password) {
+				var password_sha = CryptoJS.SHA256(password).toString();
+				if (password_sha=="0eb88d81684fbb613d3963d014182595e1edd5ec0070bb3c69d13ee3ce407ff7"){
+					chat.remove();
+					console.log("clear");
+				} else {
+					console.warn("password error");
+				}
+			}
 			
 			function getTime() {
 				var t = new Date();
@@ -133,10 +144,33 @@
 					var user = snapshot.val().sendBy;
 					var sendTime = snapshot.val().sendTime;
 					var type = snapshot.val().type;
+					var sendTime_html = "<span style='color:grey' class='time'>"+sendTime+"&nbsp;&nbsp;</span>";
+					var user_html = "<span style='color:white;'>"+user+"</span><b style='color:grey;'>>_&nbsp;</b>";
+					var innerText = "<div class='msg'>"+sendTime_html+user_html+"<span class='msg'>"+text+"</span></div>";
+					var img_src = "https://res.cloudinary.com/duquoda8z/image/fetch/c_scale,q_auto:eco,r_10,w_400/"+text;
+					var innerImg = "<div class='msg'>"+sendTime_html+user_html+"<span class='msg'><a href='"+text+"'><img src='"+img_src+"'/></a></span><small><em>点击图片看原图</em></small></div>";
+					var innerLink = "<div class='msg'>"+sendTime_html+user_html+"<span class='msg'><a href='"+text+"'>"+text+"</a></span></div>";
 					console.log("type:"+type+" '"+text+"' "+"sendBy '"+user+"' "+"at '"+sendTime+"'");
-					chatBox.append("<div class='msg'><span style='color:grey' class='time'>"+sendTime+"&nbsp;&nbsp;</span><span style='color:white;'>"+user+"</span><b style='color:grey;'>>_&nbsp;</b><span class='msg'>"+text+"</span></div>");
-				}
-				);
+					switch (type) {
+					case url:
+						var msgtype = url;
+						chatBox.append(innerLink);
+						break;
+					case text:
+						var msgtype = text;
+						chatBox.append(innerText);
+						break;
+					case img:
+						var msgtype = img;
+						chatBox.append(innerImg);
+						break;
+					default:
+						var msgtype = text;
+						chatBox.append(innerText);
+						break;
+					}
+					
+				});
 			}
         </script>
 		<style>
@@ -154,8 +188,6 @@
 			}
 			.time{
 				font-size: 10px;
-				
-				
 			}
 		</style>
     </head>
