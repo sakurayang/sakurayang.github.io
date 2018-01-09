@@ -188,7 +188,7 @@
 				});
 				chat.once("child_removed",function(snapshot_del){
 					var key_text = snapshot_del.key();
-					$("*"key_text).remove("#"+key_text);
+					$("*").remove("#"+key_text);
 				});
 			}
         </script>
