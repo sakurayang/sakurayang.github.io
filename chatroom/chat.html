@@ -186,7 +186,7 @@
 							break;
 					}
 				});
-				chat.once("child_removed",function(snapshot_del){
+				chat.on("child_removed",function(snapshot_del){
 					var key_text = snapshot_del.key();
 					$("*").remove("#"+key_text);
 				});
