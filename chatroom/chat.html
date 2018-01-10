@@ -3,17 +3,22 @@
     <head>
         <title>Chatroom</title>
 		<meta charset="utf-8" />
+
+		<link rel="stylesheet" href="../css/chatroom.css" type="text/css" media="all" />
 		<script type="text/javascript" src="https://cdn.wilddog.com/sdk/js/2.5.17/wilddog.js"></script>
         <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+
 		<script type="text/javascript" src="../js/help.js"></script>
 		<script type="text/javascript" src="../js/crypto-js/crypto-js.js"></script>
+		
+
+		
         <script>
             var infomsg = "本站仍在搭建中，功能实现进度：\nX 登陆注册\nX 聊天\nX 文字颜色\nX 发送图片\nX 云端同步删除\nO help()\nO 登陆密码\nO 用户自定义配置";
             var text = "text";
 			var url = "url";
 			var img = "img";
 			var username;
-			
 			
 			function clearMsg(password) {
 				var password_sha = CryptoJS.SHA256(password).toString();
@@ -36,6 +41,7 @@
 				var time = time_hh + ":" + time_mm + ":" + time_ss;
 				return time;
 			}
+			
 			function tip(text,color) {
 				var tipBox = document.getElementById("tipBox");
 				var tipit=$("#tipBox");
@@ -43,7 +49,7 @@
 				$("#tipBox").css({
 					backgroundColor:color,
 					fontSize:"30px",
-					top:$(window).scrollTop(),
+					top:$(window).scrollTop()+10,
 					textAlign:"center",
 					opacity:"0",
 					width:"100%",
@@ -53,19 +59,45 @@
 				});
 				tipit.animate({
 					opacity:"0.8",
-				},700);
+				},400);
 				tipit.animate({
 					opacity:"0.8",
-				},2000);
-				tipit.animate({
-					opacity:"0.8",
-				},2000);
+				},1000);
 				tipit.animate({
 					opacity:"0",
 					display:"none",
 					zIndex:"-1",
 				},700);
 			}
+			
+			function FloatImg(imgurl){
+				var IFW = $(".FloatWindow");//IFWindow = Img Float Window
+				IFW.append("<img src='"+imgurl+"' onclick='CloseFloatImg();'/>");
+				IFW.css({
+					display:"none",
+					position:"absolute",
+					zIndex:"-2",
+					left:"50%",
+					top:"50%",
+					transform:"translate(-50%,-50%)",
+					height:"90%",
+					width:"90%",
+				});
+				IFW.animate({
+					display:"inline",
+					opacity:"0.8",
+					backgroundColor:"#bdae9d",
+				},700);
+			}
+			
+			function CloseFloatImg(){
+				var IFW = $(".FloatWindow");//IFWindow = Img Float Window
+				IFW.animate({
+					display:"none",
+					opacity:"0",
+				},700);
+			}
+			
 			
 			var config = {
 				authDomain: "https://wd6413466545jrbfqv.wilddog.com",
@@ -148,6 +180,8 @@
 			}
 			
 			
+			
+			
 			function run() {
 				chat.on("child_added",function(snapshot) {
 					var chatBox = $(".chatmsg");
@@ -163,7 +197,7 @@
 					var img_src = "https://res.cloudinary.com/duquoda8z/image/fetch/c_scale,q_auto:eco,r_10,w_200/"+text;
 					
 					var innerText = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext' style='color:"+color+"'>"+text+"</div></div>";
-					var innerImg = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><b style='color:white;'>"+introtext+"</b><a href='"+text+"'><img src='"+img_src+"'/></a><small><em>点击图片看原图</em></small></div></div>";
+					var innerImg = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><b style='color:white;'>"+introtext+"</b><img src='"+img_src+"'' onclick='FloatImg("+text+");' class='msg'/><small><em>点击图片看原图</em></small></div></div>";
 					var innerLink = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><a href='"+text+"' style='color:"+color+"'>"+introtext+"</a></div></div>";
 					console.log("type:"+type+" '"+text+"' "+"sendBy '"+user+"' "+"at '"+sendTime+"'"+color+" "+introtext+" "+key_text);
 					
@@ -193,7 +227,6 @@
 			}
         </script>
 		<style>
-			@import url(../css/chatroom.css);
 			body {
 				color: #bdae9d;
 			}
@@ -226,6 +259,8 @@
 				color= #987cb9; 
 				SIZE= 3;
 			}
+			
+
 		</style>
     </head>
 	<body onload="loaded()">
@@ -235,6 +270,7 @@
 	<hr />
 	<br />
 	<div class="chatmsg"></div>
+	<div class="FloatWindow"></div>
 	<script>
 		$(document).ready(function (){run();});
 	</script>
