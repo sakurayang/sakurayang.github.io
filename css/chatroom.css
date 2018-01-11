@@ -31,3 +31,14 @@ body{
 	background-color: black;
 	color: green;
 	}
+	
+@font-face {
+    font-family: 'Inconsolata';
+    src: url('../font/Inconsolata.eot');/*IE 4.0+*/
+    src: url('../font/Inconsolata.eot?#iefix') format('embedded-opentype'),
+		 url('../font/Inconsolata.woff') format('woff'),
+		 url('../font/Inconsolata.ttf') format('truetype'), /*Firefox Safari Opera*/
+		 url('../font/Inconsolata.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
+    font-weight: normal;
+    font-style: normal;
+}
