@@ -30,6 +30,12 @@
 				}
 			}
 			
+			function focusTheMessage(id){
+				var X = $("#"+id).position().top;
+				document.body.scrollTop = X;
+				return X;
+			}
+			
 			function getTime() {
 				var t = new Date();
 				var time_h = t.getHours();
@@ -72,30 +78,64 @@
 			
 			function FloatImg(imgurl){
 				var IFW = $(".FloatWindow");//IFWindow = Img Float Window
-				IFW.append("<img src='"+imgurl+"' onclick='CloseFloatImg();'/>");
+				var clover = $(".clover");
+				IFW.empty();
+				IFW.append("<img src='"+imgurl+"' onclick='CloseFloatImg();' class='floatimg'/>");
 				IFW.css({
-					display:"none",
+					display:"inline",
 					position:"absolute",
-					zIndex:"-2",
+					zIndex:"999",
 					left:"50%",
-					top:"50%",
-					transform:"translate(-50%,-50%)",
-					height:"90%",
-					width:"90%",
+					top:$(window).scrollTop()+50,
+					transform:"translate(-50%,-0%)",
+					height:"0%",
+					width:"100%",
 				});
 				IFW.animate({
 					display:"inline",
-					opacity:"0.8",
+					opacity:"1",
 					backgroundColor:"#bdae9d",
+					zIndex:"999",
+					left:"50%",
+					top:$(window).scrollTop()+50,
+					height:"90%",
 				},700);
+				/*clover.css({
+					display:"inline",
+					position:"absolute",
+					zIndex:"997",
+					width: document.body.scrollWidth.toString(),
+					height: document.body.scrollHeight.toString(),
+					opacity: "0.5",
+					backgroundColor: "black",
+				});*/
 			}
 			
 			function CloseFloatImg(){
 				var IFW = $(".FloatWindow");//IFWindow = Img Float Window
-				IFW.animate({
+				IFW.css({
+					zIndex:"-2",
 					display:"none",
+				});
+				IFW.animate({
+					zIndex:"-2",
 					opacity:"0",
+					position:"absolute",
+					zIndex:"999",
+					left:"0%",
+					top:"0%",
+					transform:"translate(-50%,-0%)",
+					height:"0%",
 				},700);
+				/*clover.css({
+					display:"none",
+					zIndex:"-2",
+					width: "0",
+					height: "0",
+					opacity: "0",
+				});*/
+				IFW.empty();
+				IFW.removeAttr("style");
 			}
 			
 			
@@ -197,7 +237,7 @@
 					var img_src = "https://res.cloudinary.com/duquoda8z/image/fetch/c_scale,q_auto:eco,r_10,w_200/"+text;
 					
 					var innerText = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext' style='color:"+color+"'>"+text+"</div></div>";
-					var innerImg = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><b style='color:white;'>"+introtext+"</b><img src='"+img_src+"'' onclick='FloatImg("+text+");' class='msg'/><small><em>点击图片看原图</em></small></div></div>";
+					var innerImg = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><b style='color:white;'>"+introtext+"</b><img src='"+img_src+"'' onclick='FloatImg(\""+text+"\");' class='msg'/><small><em>点击图片看原图</em></small></div></div>";
 					var innerLink = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><a href='"+text+"' style='color:"+color+"'>"+introtext+"</a></div></div>";
 					console.log("type:"+type+" '"+text+"' "+"sendBy '"+user+"' "+"at '"+sendTime+"'"+color+" "+introtext+" "+key_text);
 					
@@ -259,7 +299,15 @@
 				color= #987cb9; 
 				SIZE= 3;
 			}
-			
+			/*
+			floatimg {
+				display:"inline",
+					position:"absolute",
+					zIndex:"999",
+					left:50%;
+					top
+					transform:"translate(-50%,-50%)",
+			}*/
 
 		</style>
     </head>
@@ -270,7 +318,8 @@
 	<hr />
 	<br />
 	<div class="chatmsg"></div>
-	<div class="FloatWindow"></div>
+	<div class="clover" onclick="CloseFloatImg()"></div>
+	<div class="FloatWindow" onclick="CloseFloatImg()"></div>
 	<script>
 		$(document).ready(function (){run();});
 	</script>
