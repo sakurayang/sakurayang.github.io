@@ -34,11 +34,41 @@ body{
 	
 @font-face {
     font-family: 'Inconsolata';
-    src: url('../font/Inconsolata.eot');/*IE 4.0+*/
-    src: url('../font/Inconsolata.eot?#iefix') format('embedded-opentype'),
-		 url('../font/Inconsolata.woff') format('woff'),
-		 url('../font/Inconsolata.ttf') format('truetype'), /*Firefox Safari Opera*/
-		 url('../font/Inconsolata.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
+    src: url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.eot');/*IE 4.0+*/
+    src: url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.eot?#iefix') format('embedded-opentype'),
+		 url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.woff') format('woff'),
+		 url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.ttf') format('truetype'), /*Firefox Safari Opera*/
+		 url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+	font-family: 'GenWanMin-JP';
+    src: url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.eot');/*IE 4.0+*/
+    src: url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.eot?#iefix') format('embedded-opentype'),
+		 url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.woff') format('woff'),
+		 url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.ttf') format('truetype'), /*Firefox Safari Opera*/
+		 url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+	font-family: 'GenWanMin-TW';
+    src: url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.eot');/*IE 4.0+*/
+    src: url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.eot?#iefix') format('embedded-opentype'),
+		 url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.woff') format('woff'),
+		 url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.ttf') format('truetype'), /*Firefox Safari Opera*/
+		 url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+	font-family: 'Inconsolata';
+    src: url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.eot');/*IE 4.0+*/
+    src: url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.eot?#iefix') format('embedded-opentype'),
+		 url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.woff') format('woff'),
+		 url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.ttf') format('truetype'), /*Firefox Safari Opera*/
+		 url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
     font-weight: normal;
     font-style: normal;
 }
