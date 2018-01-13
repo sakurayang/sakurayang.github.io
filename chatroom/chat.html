@@ -81,33 +81,30 @@
 			function FloatImg(imgurl){
 				var IFW = $(".FloatWindow");//IFWindow = Img Float Window
 				var FI = $(".floatimg");//FI = Float Img
+				var aa = $(window).scrollTop()+50;
 				IFW.empty();
-				IFW.append("<img src='"+imgurl+"' onclick='CloseFloatImg();' class='floatimg'/>");
+				$("body").append("<img src='"+imgurl+"' onclick='CloseFloatImg();' style='top:"+aa+"px' class='floatimg'/>");
 				IFW.css({
 					display:"inline",
 					position:"absolute",
-					zIndex:"998",
-					height:"100%",
+					zIndex:"9",
+					height:"0%",
 					width:"100%",
-					backgroundColor:"black",
-					opacity:"0.6",
+					backgroundColor:"rgba(0,0,0,0.6)",
+					top:"0",
+					bottom:"0",
+					right: "0",
+					left : "0",
+					height:document.body.scrollHeight,
 				});
-				/*IFW.animate({
-					display:"inline",
-					opacity:"1",
-					backgroundColor:"#bdae9d",
-					zIndex:"999",
-					left:"50%",
-					top:$(window).scrollTop()+50,
-					height:"100%",
-				},700);*/
+				
 				FI.css({
 					display:"inline",
 					position:"absolute",
 					zIndex:"999",
 					left:"50%",
 					top:$(window).scrollTop()+50,
-					transform:"translate(-50%,0%)",
+					transform:"translate(50%)",
 					height:"0%",
 					width:"100%",
 					opacity:"0",
@@ -115,8 +112,6 @@
 				FI.animate({
 					display:"inline",
 					opacity:"1",
-					zIndex:"999",
-					left:"50%",
 					height:"100%",
 				},700);
 			}
@@ -124,15 +119,6 @@
 			function CloseFloatImg(){
 				var IFW = $(".FloatWindow");//IFWindow = Img Float Window
 				var FI = $(".floatimg");
-				/*IFW.animate({
-					zIndex:"999",
-					opacity:"0",
-					position:"absolute",
-					left:"50%",
-					top:"0%",
-					transform:"translate(-50%,-0%)",
-					height:"0%",
-				},700);*/
 				IFW.css({
 					zIndex:"-2",
 					display:"none",
@@ -149,13 +135,7 @@
 					zIndex:"-2",
 					display:"none",
 				});
-				/*clover.css({
-					display:"none",
-					zIndex:"-2",
-					width: "0",
-					height: "0",
-					opacity: "0",
-				});*/
+				$("*").remove(".floatimg");
 				IFW.empty();
 				IFW.removeAttr("style");
 			}
@@ -327,6 +307,13 @@
 				width= 60%;
 				color= #987cb9; 
 				SIZE= 3;
+			}
+			.floatimg {
+				display:inline;
+				position:absolute;
+				z-index:999;
+				transform:translate(50%);
+				opacity:1;
 			}
 
 		</style>
