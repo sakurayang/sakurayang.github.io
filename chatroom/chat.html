@@ -10,7 +10,7 @@
 		<script type="text/javascript" src="../js/jquery.s2t.js"></script>
 		<script type="text/javascript" src="../js/jquery.xcolor.min.js"></script>
 		
-		<script type="text/javascript" src="../js/help.js"></script>
+		<script type="text/javascript" src="../js/chatroom.js"></script>
 		<script type="text/javascript" src="../js/crypto-js/crypto-js.js"></script>
 		
 
@@ -38,45 +38,6 @@
 				return X;
 			}
 			
-			function getTime() {
-				var t = new Date();
-				var time_h = t.getHours();
-				var time_m = t.getMinutes();
-				var time_s = t.getSeconds();
-				(time_h.toString().length == 1) ? time_hh = "0" + time_h.toString() : time_hh = time_h.toString();/*如果不足2位，补0*/
-				(time_m.toString().length == 1) ? time_mm = "0" + time_m.toString() : time_mm = time_m.toString();
-				(time_s.toString().length == 1) ? time_ss = "0" + time_s.toString() : time_ss = time_s.toString();
-				var time = time_hh + ":" + time_mm + ":" + time_ss;
-				return time;
-			}
-			
-			function tip(text,color) {
-				var tipBox = document.getElementById("tipBox");
-				var tipit=$("#tipBox");
-				tipBox.innerHTML =text ;
-				$("#tipBox").css({
-					backgroundColor:color,
-					fontSize:"30px",
-					top:$(window).scrollTop()+10,
-					textAlign:"center",
-					opacity:"0",
-					width:"100%",
-					position:"absolute",
-					zIndex:"999999",
-					color:"black",
-				});
-				tipit.animate({
-					opacity:"0.8",
-				},400);
-				tipit.animate({
-					opacity:"0.8",
-				},1000);
-				tipit.animate({
-					opacity:"0",
-					display:"none",
-					zIndex:"-1",
-				},700);
-			}
 			
 			function FloatImg(imgurl){
 				var IFW = $(".FloatWindow");//IFWindow = Img Float Window

@@ -18,7 +18,7 @@ body{
 	
 .title {
 	text-align: center;
-	color: #bdae9d;
+	/*color: #bdae9d;*/
 	margin:0%;
 	}
 			
@@ -34,41 +34,41 @@ body{
 	
 @font-face {
     font-family: 'Inconsolata';
-    src: url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.eot');/*IE 4.0+*/
-    src: url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.eot?#iefix') format('embedded-opentype'),
-		 url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.woff') format('woff'),
-		 url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.ttf') format('truetype'), /*Firefox Safari Opera*/
-		 url('http://saikou.ufile.ucloud.com.cn/font/Inconsolata.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
+    src: url('saikou.ufile.ucloud.com.cn/font/Inconsolata.eot');/*IE 4.0+*/
+    src: url('saikou.ufile.ucloud.com.cn/font/Inconsolata.eot?#iefix') format('embedded-opentype'),
+		 url('saikou.ufile.ucloud.com.cn/font/Inconsolata.woff') format('woff'),
+		 url('saikou.ufile.ucloud.com.cn/font/Inconsolata.ttf') format('truetype'), /*Firefox Safari Opera*/
+		 url('saikou.ufile.ucloud.com.cn/font/Inconsolata.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
 	font-family: 'GenWanMin-JP';
-    src: url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.eot');/*IE 4.0+*/
-    src: url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.eot?#iefix') format('embedded-opentype'),
-		 url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.woff') format('woff'),
-		 url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.ttf') format('truetype'), /*Firefox Safari Opera*/
-		 url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
+    src: url('saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.eot');/*IE 4.0+*/
+    src: url('saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.eot?#iefix') format('embedded-opentype'),
+		 url('saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.woff') format('woff'),
+		 url('saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.ttf') format('truetype'), /*Firefox Safari Opera*/
+		 url('saikou.ufile.ucloud.com.cn/font/GenWanMinJP-Regular.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
 	font-family: 'GenWanMin-TW';
-    src: url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.eot');/*IE 4.0+*/
-    src: url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.eot?#iefix') format('embedded-opentype'),
-		 url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.woff') format('woff'),
-		 url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.ttf') format('truetype'), /*Firefox Safari Opera*/
-		 url('http://saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
+    src: url('saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.eot');/*IE 4.0+*/
+    src: url('saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.eot?#iefix') format('embedded-opentype'),
+		 url('saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.woff') format('woff'),
+		 url('saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.ttf') format('truetype'), /*Firefox Safari Opera*/
+		 url('saikou.ufile.ucloud.com.cn/font/GenWanMinTW-Regular.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
 	font-family: 'SourceHanSansCN-Regular';
-    src: url('http://saikou.ufile.ucloud.com.cn/font/SourceHanSansCN-Regular.eot');/*IE 4.0+*/
-    src: url('http://saikou.ufile.ucloud.com.cn/font/SourceHanSansCN-Regular.eot?#iefix') format('embedded-opentype'),
-		 url('http://saikou.ufile.ucloud.com.cn/font/SourceHanSansCN-Regular.woff') format('woff'),
-		 url('http://saikou.ufile.ucloud.com.cn/font/SourceHanSansCN-Regular.ttf') format('truetype'), /*Firefox Safari Opera*/
-		 url('http://saikou.ufile.ucloud.com.cn/font/SourceHanSansCN-Regular.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
+    src: url('saikou.ufile.ucloud.com.cn/font/SourceHanSansCN-Regular.eot');/*IE 4.0+*/
+    src: url('saikou.ufile.ucloud.com.cn/font/SourceHanSansCN-Regular.eot?#iefix') format('embedded-opentype'),
+		 url('saikou.ufile.ucloud.com.cn/font/SourceHanSansCN-Regular.woff') format('woff'),
+		 url('saikou.ufile.ucloud.com.cn/font/SourceHanSansCN-Regular.ttf') format('truetype'), /*Firefox Safari Opera*/
+		 url('saikou.ufile.ucloud.com.cn/font/SourceHanSansCN-Regular.svg#webfont34M5alKg') format('svg');/*Chrome Iphone*/
     font-weight: normal;
     font-style: normal;
 }
