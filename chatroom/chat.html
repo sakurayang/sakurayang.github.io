@@ -3,16 +3,24 @@
     <head>
         <title>Chatroom</title>
 		<meta charset="utf-8" />
+
+		<link rel="stylesheet" href="../css/chatroom.css" type="text/css" media="all" />
 		<script type="text/javascript" src="https://cdn.wilddog.com/sdk/js/2.5.17/wilddog.js"></script>
         <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.s2t.js"></script>
+		<script type="text/javascript" src="../js/jquery.xcolor.min.js"></script>
+		
 		<script type="text/javascript" src="../js/help.js"></script>
 		<script type="text/javascript" src="../js/crypto-js/crypto-js.js"></script>
+		
+
+		
         <script>
-            var infomsg = "本站仍在搭建中，功能实现进度：\nX 登陆注册\nO help()\nX 聊天\nO 登陆密码\nX 发送图片\nO 云端同步删除";
+            var infomsg = "本站仍在搭建中，功能实现进度：\nX 登陆注册\nX 聊天\nX 文字颜色\nX 发送图片\nX 云端同步删除\nO help()\nO 登陆密码\nO 用户自定义配置";
             var text = "text";
 			var url = "url";
 			var img = "img";
-			var username;
+			var username = null;
 			
 			function clearMsg(password) {
 				var password_sha = CryptoJS.SHA256(password).toString();
@@ -22,6 +30,12 @@
 				} else {
 					console.warn("password error");
 				}
+			}
+			
+			function focusTheMessage(id){
+				var X = $("#"+id).position().top;
+				document.body.scrollTop = X;
+				return X;
 			}
 			
 			function getTime() {
@@ -35,6 +49,7 @@
 				var time = time_hh + ":" + time_mm + ":" + time_ss;
 				return time;
 			}
+			
 			function tip(text,color) {
 				var tipBox = document.getElementById("tipBox");
 				var tipit=$("#tipBox");
@@ -42,7 +57,7 @@
 				$("#tipBox").css({
 					backgroundColor:color,
 					fontSize:"30px",
-					top:$(window).scrollTop(),
+					top:$(window).scrollTop()+10,
 					textAlign:"center",
 					opacity:"0",
 					width:"100%",
@@ -52,19 +67,99 @@
 				});
 				tipit.animate({
 					opacity:"0.8",
-				},700);
+				},400);
 				tipit.animate({
 					opacity:"0.8",
-				},2000);
-				tipit.animate({
-					opacity:"0.8",
-				},2000);
+				},1000);
 				tipit.animate({
 					opacity:"0",
 					display:"none",
 					zIndex:"-1",
 				},700);
 			}
+			
+			function FloatImg(imgurl){
+				var IFW = $(".FloatWindow");//IFWindow = Img Float Window
+				var FI = $(".floatimg");//FI = Float Img
+				IFW.empty();
+				IFW.append("<img src='"+imgurl+"' onclick='CloseFloatImg();' class='floatimg'/>");
+				IFW.css({
+					display:"inline",
+					position:"absolute",
+					zIndex:"998",
+					height:"100%",
+					width:"100%",
+					backgroundColor:"black",
+					opacity:"0.6",
+				});
+				/*IFW.animate({
+					display:"inline",
+					opacity:"1",
+					backgroundColor:"#bdae9d",
+					zIndex:"999",
+					left:"50%",
+					top:$(window).scrollTop()+50,
+					height:"100%",
+				},700);*/
+				FI.css({
+					display:"inline",
+					position:"absolute",
+					zIndex:"999",
+					left:"50%",
+					top:$(window).scrollTop()+50,
+					transform:"translate(-50%,0%)",
+					height:"0%",
+					width:"100%",
+					opacity:"0",
+				});
+				FI.animate({
+					display:"inline",
+					opacity:"1",
+					zIndex:"999",
+					left:"50%",
+					height:"100%",
+				},700);
+			}
+			
+			function CloseFloatImg(){
+				var IFW = $(".FloatWindow");//IFWindow = Img Float Window
+				var FI = $(".floatimg");
+				/*IFW.animate({
+					zIndex:"999",
+					opacity:"0",
+					position:"absolute",
+					left:"50%",
+					top:"0%",
+					transform:"translate(-50%,-0%)",
+					height:"0%",
+				},700);*/
+				IFW.css({
+					zIndex:"-2",
+					display:"none",
+				});
+				FI.animate({
+					opacity:"0",
+					position:"absolute",
+					left:"50%",
+					top:"0%",
+					transform:"translate(-50%,-0%)",
+					height:"0%",
+				},700);
+				FI.css({
+					zIndex:"-2",
+					display:"none",
+				});
+				/*clover.css({
+					display:"none",
+					zIndex:"-2",
+					width: "0",
+					height: "0",
+					opacity: "0",
+				});*/
+				IFW.empty();
+				IFW.removeAttr("style");
+			}
+			
 			
 			var config = {
 				authDomain: "https://wd6413466545jrbfqv.wilddog.com",
@@ -99,13 +194,15 @@
 							console.log(""+username+":现在是"+getTime()+",祝你玩得开心");
 							console.info(infomsg);
 							userRoot.child("users/"+username).update({"LastLogin":getTime()});
-							tip(""+username+":现在是"+getTime()+",祝你玩得开心","#00ff40");
 						}
 					}
 				);
+				tip(""+username+":现在是"+getTime()+",祝你玩得开心","#00ff40");
+				return console.log("登录成功");
 			}
 			
-			function msg(message,type) {
+			function msg(message,type,color,introtext) {
+				
 				switch (type) {
 					case url:
 						var msgtype = url;
@@ -120,6 +217,7 @@
 						var msgtype = text;
 						break;
 				}
+				
 				if (username == null) {
 					console.error("未登录，请用login('用户名')来登录");
 					tip("未登录","red");
@@ -127,15 +225,20 @@
 				} else if (message == ""){
 					console.error("消息不能为空");
 					return console.warn("消息未发送");
-				} else if(message.length > 100){
-					console.error("消息不能超过100字");
+				} else if(message.length > 250){
+					console.error("消息不能超过250字");
 					return console.warn("消息未发送");
-				} else{
-					chat.push({"message":message,"type":msgtype,"sendBy":username,"sendTime":getTime()});
+				} else if (color == "") {
+					var color = "#bdae9d";	
+				} else if (introtext == "") {
+					var introtext = message;
+				} else { 
+					var message_t = $.s2t(message);
+					var introtext_t = $.s2t(introtext);
+					chat.push({"message":message_t,"type":msgtype,"introtext":introtext_t,"sendBy":username,"sendTime":getTime(),"color":color});
 					return console.info("消息已发送");
 				}
-				
-			}	
+			}
 			
 			function loaded() {
 				var chatBox = $(".chatmsg");
@@ -145,6 +248,8 @@
 			}
 			
 			
+			
+			
 			function run() {
 				chat.on("child_added",function(snapshot) {
 					var chatBox = $(".chatmsg");
@@ -152,39 +257,47 @@
 					var user = snapshot.val().sendBy;
 					var sendTime = snapshot.val().sendTime;
 					var type = snapshot.val().type;
+					var color = snapshot.val().color;
+					var introtext = snapshot.val().introtext;
+					var key_text = snapshot.key();
 					var sendTime_html = "<span style='color:grey' class='time'>"+sendTime+"&nbsp;&nbsp;</span>";
 					var user_html = "<span style='color:white;'>"+user+"</span><b style='color:grey;'>>_&nbsp;</b>";
-					var innerText = "<div class='msg'>"+sendTime_html+user_html+"<div class='msgtext'>"+text+"</div></div>";
 					var img_src = "https://res.cloudinary.com/duquoda8z/image/fetch/c_scale,q_auto:eco,r_10,w_200/"+text;
-					var innerImg = "<div class='msg'>"+sendTime_html+user_html+"<div class='msgtext'><a href='"+text+"'><img src='"+img_src+"'/></a><small><em>点击图片看原图</em></small></div></div>";
-					var innerLink = "<div class='msg'>"+sendTime_html+user_html+"<div class='msgtext'><a href='"+text+"'>"+text+"</a></div></div>";
-					console.log("type:"+type+" '"+text+"' "+"sendBy '"+user+"' "+"at '"+sendTime+"'");
+					
+					var innerText = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext' style='color:"+color+"'>"+text+"</div></div>";
+					var innerImg = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><b style='color:white;'>"+introtext+"</b><img src='"+img_src+"'' onclick='FloatImg(\""+text+"\");' class='msg'/><small><em>点击图片看原图</em></small></div></div>";
+					var innerLink = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><a href='"+text+"' style='color:"+color+"'>"+introtext+"</a></div></div>";
+					console.log("type:"+type+" '"+text+"' "+"sendBy '"+user+"' "+"at '"+sendTime+"'"+color+" "+introtext+" "+key_text);
 					
 					switch (type) {
 						case url:
 							var msgtype = url;
-							chatBox.append(innerLink+"<hr class='msg'/>");
+							chatBox.append(innerLink+"<hr class='msg' id='"+key_text+"'/>");
 							break;
 						case text:
 							var msgtype = text;
-							chatBox.append(innerText+"<hr class='msg'/>");
+							chatBox.append(innerText+"<hr class='msg' id='"+key_text+"'/>");
 							break;
 						case img:
 							var msgtype = img;
-							chatBox.append(innerImg+"<hr class='msg'/>");
+							chatBox.append(innerImg+"<hr class='msg' id='"+key_text+"'/>");
 							break;
 						default:
 							var msgtype = text;
-							chatBox.append(innerText+"<hr class='msg'/>");
+							chatBox.append(innerText+"<hr class='msg' id='"+key_text+"'/>");
 							break;
 					}
+				});
+				chat.on("child_removed",function(snapshot_del){
+					var key_text = snapshot_del.key();
+					$("*").remove("#"+key_text);
 				});
 			}
         </script>
 		<style>
-			@import url(../css/chatroom.css);
 			body {
 				color: #bdae9d;
+				//font-family: 'Inconsolata', 'GenWanMin-TW', 'GenWanMin-JP';
 			}
 			.msg {
 				margin-top: 10px;
@@ -198,12 +311,12 @@
 				
 			}
 			.msgtext {
-				font-size: 20px;
+				font-size: 23px;
 				text-align:justify;
 				width:75%;
 			}
 			.time{
-				font-size: 10px;
+				font-size: 12px;
 			}
 			hr.msg {
 				align: left;
@@ -215,6 +328,7 @@
 				color= #987cb9; 
 				SIZE= 3;
 			}
+
 		</style>
     </head>
 	<body onload="loaded()">
@@ -224,6 +338,7 @@
 	<hr />
 	<br />
 	<div class="chatmsg"></div>
+	<div class="FloatWindow" onclick="CloseFloatImg()"></div>
 	<script>
 		$(document).ready(function (){run();});
 	</script>
