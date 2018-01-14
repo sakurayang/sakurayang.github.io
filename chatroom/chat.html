@@ -142,7 +142,7 @@
 				return console.log("登录成功");
 			}
 			
-			function msg(message,type,color,introtext) {
+			function msg(message,color,introtext,type) {
 				
 				switch (type) {
 					case url:
@@ -169,11 +169,15 @@
 				} else if(message.length > 250){
 					console.error("消息不能超过250字");
 					return console.warn("消息未发送");
-				} else if (color == "") {
+				}
+				
+				if (color == "" || color == null) {
 					var color = "#bdae9d";	
-				} else if (introtext == "") {
+				}
+				if (introtext == "") {
 					var introtext = message;
 				} else { 
+					var introtext = message;
 					var message_t = $.s2t(message);
 					var introtext_t = $.s2t(introtext);
 					chat.push({"message":message_t,"type":msgtype,"introtext":introtext_t,"sendBy":username,"sendTime":getTime(),"color":color});
@@ -208,7 +212,7 @@
 					var innerText = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext' style='color:"+color+"'>"+text+"</div></div>";
 					var innerImg = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><b style='color:white;'>"+introtext+"</b><img src='"+img_src+"'' onclick='FloatImg(\""+text+"\");' class='msg'/><small><em>点击图片看原图</em></small></div></div>";
 					var innerLink = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><a href='"+text+"' style='color:"+color+"'>"+introtext+"</a></div></div>";
-					console.log("type:"+type+" '"+text+"' "+"sendBy '"+user+"' "+"at '"+sendTime+"'"+color+" "+introtext+" "+key_text);
+					console.log(key_text + ": type:" +type+ " " +user+ ": '"+text+"' at '"+sendTime+"'"+color+" "+introtext);
 					
 					switch (type) {
 						case url:

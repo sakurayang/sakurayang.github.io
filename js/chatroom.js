@@ -58,6 +58,7 @@ function color(bgcolor,textcolor) {
 }
 
 function bgimg(url){
+	color();
 	if (!url || url == ""){
 		console.error("请输入地址");
 	} else {
