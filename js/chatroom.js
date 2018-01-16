@@ -50,7 +50,7 @@ function color(bgcolor,textcolor) {
 		var bgcolor = bgcolor;
 		var textcolor = textcolor;
 	}
-	
+	$("body").css({backgroundImage:"url('')",backgroundRepeat:"no-repeat",backgroundSize:"100%",});
 	$("body").animate({backgroundColor:"white",color:"white",},250);
 	$(".button").animate({backgroundColor:"white",color:"white",},250);
 	$("body").animate({backgroundColor:bgcolor,color:textcolor,},300);
@@ -58,13 +58,18 @@ function color(bgcolor,textcolor) {
 }
 
 function bgimg(url){
-	color();
 	if (!url || url == ""){
 		console.error("请输入地址");
 	} else {
 		$("body").animate({backgroundColor:"white",opacity:"0.1"},250);
-		$("body").css({backgroundImage:"url("+url+")",backgroundRepeat:"no-repeat",backgroundSize:"100%",});
-		$("body").animate({opacity:"1.0"},250);
+		$("body").css({
+			backgroundImage:"url(https://res.cloudinary.com/duquoda8z/image/fetch/o_50,b_black/"+url+")",
+			backgroundRepeat:"no-repeat",
+			backgroundSize:"100%",
+			backgroundAttachment:"fixed",
+			});
+		$("body").animate({backgroundColor:"black"},250);
+		$("body").animate({opacity:"1"},250);
 	}
 	
 }
