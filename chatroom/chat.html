@@ -5,22 +5,25 @@
 		<meta charset="utf-8" />
 
 		<link rel="stylesheet" href="../css/chatroom.css" type="text/css" media="all" />
+		
 		<script type="text/javascript" src="https://cdn.wilddog.com/sdk/js/2.5.17/wilddog.js"></script>
+		
         <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.s2t.js"></script>
 		<script type="text/javascript" src="../js/jquery.xcolor.min.js"></script>
 		
 		<script type="text/javascript" src="../js/chatroom.js"></script>
 		<script type="text/javascript" src="../js/crypto-js/crypto-js.js"></script>
-		
+		<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>  
 
 		
         <script>
-            var infomsg = "本站仍在搭建中，功能实现进度：\nX 登陆注册\nX 聊天\nX 文字颜色\nX 发送图片\nX 云端同步删除\nO help()\nO 登陆密码\nO 用户自定义配置";
+            var infomsg = "本站仍在搭建中，功能实现进度：\nX 登陆注册\nX 聊天\nX 文字颜色\nX 发送图片\nX 云端同步删除\nO help()\nX 登陆密码\nO 用户自定义配置";
             var text = "text";
 			var url = "url";
 			var img = "img";
 			var username = null;
+			
 			
 			function clearMsg(password) {
 				var password_sha = CryptoJS.SHA256(password).toString();
@@ -65,7 +68,7 @@
 					left:"50%",
 					top:$(window).scrollTop()+50,
 					transform:"translate(50%)",
-					height:"0%",
+					height:"0",
 					width:"100%",
 					opacity:"0",
 				});
@@ -106,13 +109,22 @@
 			wilddog.initializeApp(config);
 			var chat = wilddog.sync().ref("/chat");
 			
-			function reg(username) {
+			function reg(username,password) {
 				var userRoot = wilddog.sync().ref();
+				var password_sha = CryptoJS.SHA256(password).toString();
 				userRoot.once("value")
 					.then(function(snapshot) {
 						var name = snapshot.child("/users/"+username).exists();
 						if (name == false) {
-							userRoot.child("users/"+username).set({"name":username,"regTime":new Date().toString(),"LastLogin":getTime()})
+							userRoot.child("users/"+username).set({
+							"name":username,
+							"password":password_sha,
+							"regTime":new Date().toString(),
+							"LastLogin":getTime(),
+							"regIP":returnCitySN["cip"],
+							"LastLoginIP":returnCitySN["cip"],
+							});
+							console.warn("密码是：'"+password+"'")
 						} else {
 							console.error("'" +username+"'已经存在")
 						}
@@ -120,24 +132,28 @@
 				);
 			}
 			
-			function login(username) {
-				var userRoot = wilddog.sync().ref();
+			function login(username,password) {
+				var userRoot = wilddog.sync().ref("/users");
 				userRoot.once("value")
 					.then(function(snapshot) {
-						var name = snapshot.child("/users/"+username).exists();
+						var name = snapshot.child("/"+username).exists();
+						var password_sha = snapshot.child("/"+username+"/password").val();
 						if (name == false) {
-							console.error("'" +username+"'未注册，请用reg('"+username+"')来注册")
+							console.error("'" +username+"'未注册，请用reg('"+username+"',password)来注册")
 							tip("未注册","red");
-						} else {
+						} else if (password == null || password == ""){
+							console.error("请输入密码");
+						} else if (password_sha == CryptoJS.SHA256(password).toString()){
 							window.username = username;
 							console.log(""+username+":现在是"+getTime()+",祝你玩得开心");
 							console.info(infomsg);
-							userRoot.child("users/"+username).update({"LastLogin":getTime()});
+							userRoot.child("users/"+username).update({"LastLogin":getTime(),"LastLoginIP":returnCitySN["cip"],});
+							tip(""+username+":现在是"+getTime()+",祝你玩得开心","#00ff40");
+							console.log("登录成功");
 						}
 					}
 				);
-				tip(""+username+":现在是"+getTime()+",祝你玩得开心","#00ff40");
-				return console.log("登录成功");
+				
 			}
 			
 			function msg(message,color,introtext,type) {
@@ -170,12 +186,19 @@
 				}
 				
 				if (color == "" || color == null) {
-					var color = "#bdae9d";	
-				}
-				if (introtext == "") {
+					var color = "#bdae9d";
+					var message_t = $.s2t(message);
+					var introtext_t = $.s2t(introtext);
+					chat.push({"message":message_t,"type":msgtype,"introtext":introtext_t,"sendBy":username,"sendTime":getTime(),"color":color});
+					return console.info("消息已发送");
+				} else if (introtext == "" || introtext == null || typeof(introtext)=="undefined") {
 					var introtext = message;
-				} else { 
-					var introtext = message;
+					var message_t = $.s2t(message);
+					var introtext_t = $.s2t(introtext);
+					chat.push({"message":message_t,"type":msgtype,"introtext":introtext_t,"sendBy":username,"sendTime":getTime(),"color":color});
+					return console.info("消息已发送");
+				} else {
+					var introtext = introtext;
 					var message_t = $.s2t(message);
 					var introtext_t = $.s2t(introtext);
 					chat.push({"message":message_t,"type":msgtype,"introtext":introtext_t,"sendBy":username,"sendTime":getTime(),"color":color});
@@ -309,6 +332,58 @@
 				z-index:999;
 				transform:translate(50%);
 				opacity:1;
+			}
+			
+			::-webkit-scrollbar {
+				width: 5px;
+				background-color: #2a211c;
+				border: 0;
+			}
+			::-webkit-scrollbar:hover,::-webkit-scrollbar:actve,::-webkit-scrollbar:focus{
+				width: 15px;
+			}
+			::-webkit-scrollbar-button {
+				display:none;
+			}
+			::-webkit-scrollbar-track {
+				display:none;
+			}
+			::-webkit-scrollbar-track-piece {
+				background-color: #2a211c;
+			}
+			::-webkit-scrollbar-thumb {
+				background-color: #bdae9d;
+				box-shadow: -7px 2px 20px 7px white;
+			}
+			::-webkit-scrollbar-corner {
+				display:none;
+			}
+			
+			@-moz-document url-prefix(http://),url-prefix(https://) {   
+				/* 滚动条颜色 */  
+				scrollbar {   
+					-moz-appearance: none !important;   
+					background: #2a211c !important;   
+				}   
+				/* 滚动条按钮颜色 */  
+				thumb,scrollbarbutton {   
+					-moz-appearance: none !important;   
+					background-color: #bdae9d !important;   
+				}   
+				/* 鼠标悬停时按钮颜色 */  
+				
+				thumb:hover,scrollbarbutton:hover {   
+					-moz-appearance: none !important;   
+					background-color: #bdae9d !important;   
+				}   
+				/* 隐藏上下箭头 */  
+				scrollbarbutton {   
+					display: none !important;   
+				}   
+				/* 纵向滚动条宽度 */  
+				scrollbar[orient="vertical"] {   
+					display:none !important;   
+				}   
 			}
 
 
