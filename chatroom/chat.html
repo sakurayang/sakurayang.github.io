@@ -33,11 +33,10 @@
 			}
 			
 			function focusTheMessage(id){
-				var X = $("#"+id).position().top;
-				document.body.scrollTop = X;
-				return X;
+				var Y = $("#"+id).position().top;
+				 window.scrollTo(100,Y);
+				return Y;
 			}
-			
 			
 			function FloatImg(imgurl){
 				var IFW = $(".FloatWindow");//IFWindow = Img Float Window
@@ -100,7 +99,6 @@
 				IFW.empty();
 				IFW.removeAttr("style");
 			}
-			
 			
 			var config = {
 				authDomain: "https://wd6413466545jrbfqv.wilddog.com",
@@ -184,19 +182,14 @@
 					return console.info("消息已发送");
 				}
 			}
-			
-			
-			
+
 			function loaded() {
 				var chatBox = $(".chatmsg");
 				if (getTime() == "00:00:00"){
 					chat.remove();
 				}
 			}
-			
-			
-			
-			
+
 			function run() {
 				chat.on("child_added",function(snapshot) {
 					var chatBox = $(".chatmsg");
@@ -235,6 +228,7 @@
 							chatBox.append(innerText+"<hr class='msg' id='"+key_text+"'/>");
 							break;
 					}
+					focusTheMessage(key_text);
 				});
 				chat.on("child_removed",function(snapshot_del){
 					var text = snapshot_del.val().message;
