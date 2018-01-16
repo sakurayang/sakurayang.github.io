@@ -185,6 +185,8 @@
 				}
 			}
 			
+			
+			
 			function loaded() {
 				var chatBox = $(".chatmsg");
 				if (getTime() == "00:00:00"){
@@ -205,13 +207,14 @@
 					var color = snapshot.val().color;
 					var introtext = snapshot.val().introtext;
 					var key_text = snapshot.key();
+					
 					var sendTime_html = "<span style='color:grey' class='time'>"+sendTime+"&nbsp;&nbsp;</span>";
 					var user_html = "<span style='color:white;'>"+user+"</span><b style='color:grey;'>>_&nbsp;</b>";
 					var img_src = "https://res.cloudinary.com/duquoda8z/image/fetch/c_scale,q_auto:eco,r_10,w_200/"+text;
 					
 					var innerText = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext' style='color:"+color+"'>"+text+"</div></div>";
-					var innerImg = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><b style='color:white;'>"+introtext+"</b><img src='"+img_src+"'' onclick='FloatImg(\""+text+"\");' class='msg'/><small><em>点击图片看原图</em></small></div></div>";
-					var innerLink = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><a href='"+text+"' style='color:"+color+"'>"+introtext+"</a></div></div>";
+					var innerImg = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><b style='color:white;' id='"+key_text+"'>"+introtext+"</b><img src='"+img_src+"'' onclick='FloatImg(\""+text+"\");' class='msg' id='"+key_text+"' /><small><em>点击图片看原图</em></small></div></div>";
+					var innerLink = "<div class='msg' id='"+key_text+"'>"+sendTime_html+user_html+"<div class='msgtext'><a href='"+text+"' style='color:"+color+"' id='"+key_text+"'>"+introtext+"</a></div></div>";
 					console.log(key_text + ": type:" +type+ " " +user+ ": '"+text+"' at '"+sendTime+"'"+color+" "+introtext);
 					
 					switch (type) {
@@ -234,8 +237,37 @@
 					}
 				});
 				chat.on("child_removed",function(snapshot_del){
+					var text = snapshot_del.val().message;
+					var user = snapshot_del.val().sendBy;
+					var type = snapshot_del.val().type;
+					var color = snapshot_del.val().color;
+					var introtext = snapshot_del.val().introtext;
 					var key_text = snapshot_del.key();
 					$("*").remove("#"+key_text);
+					console.warn("delete:"+key_text + ": type:" +type+ " " +user+ ": '"+text+"' "+color+" "+introtext)
+				});
+				chat.on("child_changed",function(snapshot_update){
+					var key_text = snapshot_update.key();
+					var text = snapshot_update.val().message;
+					var user = snapshot_update.val().sendBy;
+					var type = snapshot_update.val().type;
+					var color = snapshot_update.val().color;
+					var introtext = snapshot_update.val().introtext;
+					var img_src = "https://res.cloudinary.com/duquoda8z/image/fetch/c_scale,q_auto:eco,r_10,w_200/"+text;
+
+					if (type == "text") {
+						$("div#"+key_text +" "+".msgtext").text(text);
+						$("div#"+key_text +" "+".msgtext").css({"color":"'"+color+"'",});
+						console.info("changed:"+key_text + ": type:" +type+ " " +user+ ": '"+text+"' "+color+" "+introtext)
+					} else if (type == "img") {
+						$("img#"+key_text).attr({"src":img_src});
+						$("b#"+key_text).text(text);
+						
+					} else if (type == "url") {
+						$("a#"+key_text).attr({"href":img_src});
+						$("a#"+key_text).text(text);
+						
+					} else {console.error(key_text+text+user+type+color+introtext+img_src);}
 				});
 			}
         </script>
