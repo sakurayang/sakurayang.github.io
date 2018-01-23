@@ -1,5 +1,17 @@
 var bilibule = "#66ccff";
 var bilipink = "#ffafc9";
+var urlRE = "^((https|http|ftp|rtsp|mms)?://)"
+			+ "?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?" //ftp的user@ 
+			+ "(([0-9]{1,3}\.){3}[0-9]{1,3}" // IP形式的URL- 199.194.52.184 
+			+ "|" // 允许IP和DOMAIN（域名）
+			+ "([0-9a-z_!~*'()-]+\.)*" // 域名- www. 
+			+ "([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\." // 二级域名 
+			+ "[a-z]{2,6})" // first level domain- .com or .museum 
+			+ "(:[0-9]{1,4})?" // 端口- :80 
+			+ "((/?)|" // a slash isn't required if there is no file name 
+			+ "(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$"; 
+var checkUrl = new RegExp(urlRE,"ig");
+
 
 function getTime() {
 	var t = new Date();
@@ -56,23 +68,36 @@ function color(bgcolor,textcolor) {
 		var pf = userRoot.child(username);
 		userRoot.once("value")
 			.then(function(profile) {
-				var folder = profile.child(username+"/profile");
-
-				pf.update({"profile":{"color":{"bgColor":bgcolor,"textColor":textcolor}}});
-				
+				var folder = userRoot.child(username+"/profile");
+				folder.update({"/color":{"bgColor":bgcolor,"textColor":textcolor}});	
 			});
+			
+		$("body").css({backgroundImage:"url('')",backgroundRepeat:"no-repeat",backgroundSize:"100%",});
+		$("body").animate({backgroundColor:"white",color:"white",},250);
+		$(".button").animate({backgroundColor:"white",color:"white",},250);
+		$("body").animate({backgroundColor:bgcolor,color:textcolor,},300);
+		$(".button").animate({backgroundColor:bgcolor,color:textcolor,},300);
 	}
-	$("body").css({backgroundImage:"url('')",backgroundRepeat:"no-repeat",backgroundSize:"100%",});
-	$("body").animate({backgroundColor:"white",color:"white",},250);
-	$(".button").animate({backgroundColor:"white",color:"white",},250);
-	$("body").animate({backgroundColor:bgcolor,color:textcolor,},300);
-	$(".button").animate({backgroundColor:bgcolor,color:textcolor,},300);
+	
 }
 
 function bgimg(url){
-	if (!url || url == ""){
+	var userRoot = wilddog.sync().ref("/users/");
+	if (username == null || !username) {
+		console.error("未登录，请用login('用户名')来登录");
+		tip("未登录","red");
+	} else if (!url || url == ""){
 		console.error("请输入地址");
+	} else if (!url.match(checkUrl)){
+		console.error("你的链接：'"+ulr+"'不对喵~ 请输入正确的链接喵~~");
+		tip("请输入正确的链接喵~~","red");
 	} else {
+		userRoot.once("value")
+			.then(function(profile) {
+				var folder = userRoot.child(username+"/profile");
+				folder.update({"/bgimg":url});	
+			});
+			
 		$("body").animate({backgroundColor:"white",opacity:"0.1"},250);
 		$("body").css({
 			backgroundImage:"url(https://res.cloudinary.com/duquoda8z/image/fetch/o_50,b_black/"+url+")",
