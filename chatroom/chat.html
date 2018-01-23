@@ -120,13 +120,13 @@
 			var chat = wilddog.sync().ref("/chat");
 			
 			function reg(username,password) {
-				var userRoot = wilddog.sync().ref();
+				var userRoot = wilddog.sync().ref("/users");
 				var password_sha = CryptoJS.SHA256(password).toString();
 				userRoot.once("value")
 					.then(function(snapshot) {
-						var name = snapshot.child("/users/"+username).exists();
+						var name = snapshot.child("/"+username).exists();
 						if (name == false) {
-							userRoot.child("users/"+username).set({
+							userRoot.child("/"+username).set({
 							"name":username,
 							"password":password_sha,
 							"regTime":new Date().toString(),
@@ -157,7 +157,7 @@
 							window.username = username;
 							console.log(""+username+":现在是"+getTime()+",祝你玩得开心");
 							console.info(infomsg);
-							userRoot.child("users/"+username).update({"LastLogin":getTime(),"LastLoginIP":returnCitySN["cip"],});
+							userRoot.child("/"+username).update({"LastLogin":getTime(),"LastLoginIP":returnCitySN["cip"],});
 							tip(""+username+":现在是"+getTime()+",祝你玩得开心","#00ff40");
 							console.log("登录成功");
 						}

@@ -42,13 +42,25 @@ function tip(text,color) {
 }
 
 function color(bgcolor,textcolor) {
-	if (!bgcolor){
+	var userRoot = wilddog.sync().ref("/users/");
+	if (username == null || !username) {
+		console.error("未登录，请用login('用户名')来登录");
+		tip("未登录","red");
+	} else if (!bgcolor){
 		var bgcolor = "#2a211c";
 	} else if (!textcolor) {
 		var textcolor = "#bdae9d";
 	} else {
 		var bgcolor = bgcolor;
 		var textcolor = textcolor;
+		var pf = userRoot.child(username);
+		userRoot.once("value")
+			.then(function(profile) {
+				var folder = profile.child(username+"/profile");
+
+				pf.update({"profile":{"color":{"bgColor":bgcolor,"textColor":textcolor}}});
+				
+			});
 	}
 	$("body").css({backgroundImage:"url('')",backgroundRepeat:"no-repeat",backgroundSize:"100%",});
 	$("body").animate({backgroundColor:"white",color:"white",},250);
