@@ -179,7 +179,6 @@
 			
 			function msg(message,color,introtext,type) {
 				if (introtext == "" || introtext == null || !introtext) {
-					var introtext = "none";
 					var introtext_t = "none";
 				} else {
 					introtext_t = $.s2t(introtext);
