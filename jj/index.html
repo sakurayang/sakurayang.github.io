@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.xcolor.min.js"></script>
+    <script type="text/javascript">
+        var userBackground = $("input #background").val();
+        var Background = "http://saikou.ufile.ucloud.com.cn/image/index.jpeg";
+        $("body").css({
+            background: "url('" + Background + "')",
+        });
+    </script>
+
+    <style>
+        /*@import url(./css/);*/
+        
+        @keyframes alpha {
+            0% {
+                background-color: rgba(255, 255, 255, 0);
+            }
+            25% {
+                background-color: rgba(255, 255, 255, 0.05);
+            }
+            50% {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            75% {
+                background-color: rgba(255, 255, 255, 0.15);
+            }
+            100% {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+        }
+        
+        .URLInput {
+            width: 70%;
+            height: 5%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom-color: rgba(0, 0, 0, 0.8);
+            border-bottom-width: 2px;
+            box-shadow: none;
+            font-size: 105%;
+        }
+        
+        body {
+            background: url('https://res.cloudinary.com/duquoda8z/image/fetch/o_60,b_black/http://saikou.ufile.ucloud.com.cn/image/index.jpeg');
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+        $(document).ready(function() {
+            $(".URLInput").css({
+                fontSize: Math.ceil(Math.abs(document.documentElement.clientHeight) * 0.05) + "px"
+            });
+
+        });
+    </script>
+    <div class="window">
+        <input defaultvalue="null" class="URLInput">
+    </div>
+</body>
+
+</html>
