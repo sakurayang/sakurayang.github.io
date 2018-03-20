@@ -5,10 +5,11 @@
 		<title>Loding...</title>
 	    <script type="text/javascript" src="./js/load.js"></script>
 		<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="./js/vue.js"></script>
+		<script type="text/javascript" src="./js/vue-debug.js"></script>
+		
 		<!--<script type="text/javascript" src="./js/canvas-to-blob.min.js"></script>
 		<script type="text/javascript" src="./js/load-image.min.js"></script>
-		
+		<script type="text/javascript" src="./js/vue.min.js"></script>
 		<script type="text/javascript" src="./js/jquery.ui.widget.js"></script>
 		<script type="text/javascript" src="./js/jquery.iframe-transport.js"></script>
 		<script type="text/javascript" src="./js/jquery.fileupload.js"></script>
@@ -34,6 +35,25 @@
 
 */
 
+	function getTime() {
+		var t = new Date();
+		var time_h = t.getHours();
+		var time_m = t.getMinutes();
+		var time_s = t.getSeconds();
+		(time_h.toString().length == 1) ? time_hh = "0" + time_h.toString() : time_hh = time_h.toString();/*如果不足2位，补0*/
+		(time_m.toString().length == 1) ? time_mm = "0" + time_m.toString() : time_mm = time_m.toString();
+		(time_s.toString().length == 1) ? time_ss = "0" + time_s.toString() : time_ss = time_s.toString();
+		var time = time_hh + ":" + time_mm + ":" + time_ss;
+		return time;
+	}
+	$(document).ready(function (){
+	var DateTime = new Vue({
+		el: '#DateTime',
+		data:{
+			message: getTime()
+		}
+	});
+	});
 	</script>
 
 		<style>
@@ -150,6 +170,14 @@
 			background-color:#2f2f2f;
 			box-shadow:1px 3px 4px 0px rgba(0,0,0,0.67)
 		}
+		
+		#DateTime{
+			position:absolute;
+			text-align:right;
+			right:0.1em;
+			top:0.1em;
+			background-color:grey;
+		}
 		</style>
 		
 	</head>
@@ -166,6 +194,9 @@
                 </div>
         </div>
         <!--load animate END-->
+		<div id="DateTime">
+		你进入的时间是：{{ message }}
+		</div>
 	<div class="sider">
 		<div style="
 				margin:5%;
@@ -179,6 +210,7 @@
 		">
 			Gerard
 		</div>
+		
 		</div>
 		<div class="nav">qaaaa</div>
 		<div class="nav">qaaaa</div>

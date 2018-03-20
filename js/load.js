@@ -1,3 +1,4 @@
+function load (title_name){
 window.addEventListener("load", 
 			function() {
 				console.time("load");
@@ -7,10 +8,10 @@ window.addEventListener("load",
                 var wrapper = document.getElementById("wrapper");
 				console.log("Delete overlay");
                 document.body.removeChild(wrapper);
-				document.title = 'Github List';
+				document.title = title_name;
 				console.log("change Title");
             }
-			);
+			);}
 			function loaded() {
 			window.status="page loade finish!";
 			console.log("page load finish!");
