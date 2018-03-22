@@ -20,6 +20,7 @@
 		
 	<script type="text/javascript">
 		load("博客主页");
+		var ClockTime;
 		//$.cloudinary.config({ cloud_name: "duquoda8z"});
 		/*
 		var CLOUDINARY = {
@@ -34,7 +35,7 @@
 				}
 
 */
-
+	
 	function getTime() {
 		var t = new Date();
 		var time_h = t.getHours();
@@ -46,13 +47,17 @@
 		var time = time_hh + ":" + time_mm + ":" + time_ss;
 		return time;
 	}
+	
+	function showTime(){
+		document.getElementById("DateTime").innerText=getTime();
+		setInterval(showTime,1000);
+	}
+	
+	
+	
+	
 	$(document).ready(function (){
-	var DateTime = new Vue({
-		el: '#DateTime',
-		data:{
-			message: getTime()
-		}
-	});
+		showTime();
 	});
 	</script>
 
@@ -195,7 +200,7 @@
         </div>
         <!--load animate END-->
 		<div id="DateTime">
-		你进入的时间是：{{ message }}
+		
 		</div>
 	<div class="sider">
 		<div style="
