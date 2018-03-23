@@ -20,22 +20,10 @@
 		
 	<script type="text/javascript">
 		load("博客主页");
-		var ClockTime;
-		//$.cloudinary.config({ cloud_name: "duquoda8z"});
-		/*
-		var CLOUDINARY = {
-					cloud_name: 'duquoda8z',
-					api_key: '343961879143456',
-					api_secret: 'A_0Yl15Yv0HPH1JezmhAo1NOVIk',
-					Environment variable: 'CLOUDINARY_URL=cloudinary://343961879143456:A_0Yl15Yv0HPH1JezmhAo1NOVIk@duquoda8z',
-					base:'http://res.cloudinary.com/duquoda8z',
-					image:'https://api.cloudinary.com/v1_1/duquoda8z/image/upload',
-					video:'https://api.cloudinary.com/v1_1/duquoda8z/video/upload',
-					audio:'https://api.cloudinary.com/v1_1/duquoda8z/raw/upload'
-				}
-
-*/
-	
+		var hei=document.documentElement.clientHeight.toString();
+		var wid=document.documentElement.clientWidth.toString();
+		
+		
 	function getTime() {
 		var t = new Date();
 		var time_h = t.getHours();
@@ -50,7 +38,7 @@
 	
 	function showTime(){
 		document.getElementById("DateTime").innerText=getTime();
-		setInterval(showTime,1000);
+		setTimeout("showTime()",1000);
 	}
 	
 	
@@ -58,6 +46,18 @@
 	
 	$(document).ready(function (){
 		showTime();
+		
+		$(".white").css({
+			position:"absolute",
+			top:"0",
+			left:"17%",
+			width:(document.documentElement.clientWidth-document.documentElement.clientWidth*0.17).toString(),
+			height:hei,
+			backgroundColor:"rgba(255,255,255,0.54)",
+			zIndex:"0",
+		});
+		
+		
 	});
 	</script>
 
@@ -71,65 +71,9 @@
 			
 			body {
 				/*background-image: url(http://7xpoj6.com1.z0.glb.clouddn.com/%28105%29.jpg);*/
-				background-color: #18294a;
+				background-color: white;
 				background-repeat: no-rerpeat;
 				background-attachment: fixed;
-			}
-			
-			.main {
-				display: -moz-flex;
-				display: -webkit-flex;
-				display: flex;
-				
-				-moz-flex-warp: warp;
-				-webkit-flex-warp: warp;
-				flex-warp: warp;
-				
-			}
-			
-			.show {
-				background-color: rgba(255, 255, 255, 0.6);
-				height: auto;
-				width: 40%;
-				border-radius: 10px;
-				border: 3px soild;
-				border-shadow: 3px 4px 2px 5px #8b8b8b;
-				font-size: 20px;
-				text-align: center;
-				padding: 2%;
-				margin: 1%;
-				transition-duration: 0.2s;
-			}
-			
-			.show:hover{
-				background-color: white;
-				transition-duration: 0.3s;
-				font-size: 30px;
-
-				padding: 1%;
-				width: 100%;
-			}
-			
-			.text {
-				font-size:15px;
-				margin: 0px 8%;
-				transition-duration: 0.2s;
-			}
-			
-			.text:hover {
-				font-size:20px;
-				transition-duration: 0.3s;
-			}
-			
-			div>em {
-				font-size: 10px;
-				color: #c54a52;
-				transition-duration: 0.2s;
-			}
-			
-			div>em:hover {
-			font-size: 15px;
-			transition-duration: 0.3s;
 			}
 			
 			a:link , 
@@ -139,10 +83,7 @@
 				color: #4ABDFF;
 				text-decoration:none;
 			}
-		.title{
-			background-color:rgba(255,255,255,0.3);
-			text-align:center;
-}
+
 	
 		.sider{
 			width:17%;
@@ -153,7 +94,7 @@
 			margin:0;
 			border:0;
 			box-shadow:3px 1px 4px 0px rgba(0,0,0,0.67);
-			background-color:white;
+			background-color:grey;
 			/*background-image:url("./1.png");*/
 			background-repeat:no-repeat;
 			background-position:center;
@@ -168,20 +109,44 @@
 			font-size:1.68em;
 			box-shadow:none;
 			padding-top:5%;
+			z-index:1;
 		}
 		
 		.nav:hover ,
 		.nav:active{
 			background-color:#2f2f2f;
-			box-shadow:1px 3px 4px 0px rgba(0,0,0,0.67)
+			box-shadow:1px 3px 4px 0px rgba(0,0,0,0.67);
 		}
 		
 		#DateTime{
 			position:absolute;
-			text-align:right;
-			right:0.1em;
-			top:0.1em;
-			background-color:grey;
+			text-align:center;
+			left:37%;
+			top:30%;
+			font-size:10em;
+			text-shadow:3px 3px 13px rgba(0, 0, 0, 0.54);
+			z-index:-1;
+		}
+		
+		.infobox{
+			height:30%;
+			width:30%;
+			position:absolute;
+			margin:1.5em;
+		}
+		#1{
+			left: 20%;
+		}
+		#2{
+		}
+		#3{
+		}
+		#4{
+		}
+		
+		.headimg{
+			width:17%;
+			height:auto;
 		}
 		</style>
 		
@@ -204,24 +169,26 @@
 		</div>
 	<div class="sider">
 		<div style="
-				margin:5%;
+			margin:5%;
 		">
-			<img src="https://res.cloudinary.com/duquoda8z/image/fetch/f_png,bo_5px_solid_grey,h_200,w_200,r_max,c_fill/https://static.mengniang.org/common/d/de/Kinoshita_Hideyoshi.jpg"/>
+
+			<img  src="https://res.cloudinary.com/duquoda8z/image/fetch/f_png,bo_5px_solid_grey,h_200,w_200,r_max,c_fill/https://static.mengniang.org/common/d/de/Kinoshita_Hideyoshi.jpg"/>
+
 			<div style="
 				color:grey;
 				top:10%;
 				margin:2%;
 				font-size:2.5em;
-		">
+			">
 			Gerard
+			</div>
 		</div>
-		
-		</div>
-		<div class="nav">qaaaa</div>
-		<div class="nav">qaaaa</div>
-		<div class="nav">qaaaa</div>
-		<div class="nav">qaaaa</div>
-		
-		
 	</div>
+	<div class="white"></div>
+	
+		<div class="infobox">1</div>
+		<div class="infobox">2</div>
+		<br/>
+		<div class="infobox">3</div>
+		<div class="infobox">4</div>
        </body>
