@@ -3,10 +3,10 @@
 	<head>
 		<meta http-equiv="content-Type" content="text/html; charset=utf-8">
 		<title>Loding...</title>
-	    <script type="text/javascript" src="./js/load.js"></script>
+		<script type="text/javascript" src="./js/load.js"></script>
 		<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="./js/vue-debug.js"></script>
-		
+
 		<!--<script type="text/javascript" src="./js/canvas-to-blob.min.js"></script>
 		<script type="text/javascript" src="./js/load-image.min.js"></script>
 		<script type="text/javascript" src="./js/vue.min.js"></script>
@@ -17,13 +17,13 @@
 		<script type="text/javascript" src="./js/jquery.fileupload-process.js"></script>
 		<script type="text/javascript" src="./js/jquery.fileupload-validate.js"></script>
 		<script type="text/javascript" src="./js/jquery.cloudinary.js"></script>-->
-		
+
 	<script type="text/javascript">
-		load("博客主页");
+		load("个人主页");
 		var hei=document.documentElement.clientHeight.toString();
 		var wid=document.documentElement.clientWidth.toString();
-		
-		
+
+
 	function getTime() {
 		var t = new Date();
 		var time_h = t.getHours();
@@ -35,18 +35,19 @@
 		var time = time_hh + ":" + time_mm + ":" + time_ss;
 		return time;
 	}
-	
+/*
 	function showTime(){
 		document.getElementById("DateTime").innerText=getTime();
 		setTimeout("showTime()",1000);
 	}
-	
-	
-	
-	
+*/
+
+
+
+
 	$(document).ready(function (){
-		showTime();
-		
+		//showTime();
+
 		$(".white").css({
 			position:"absolute",
 			top:"0",
@@ -56,139 +57,117 @@
 			backgroundColor:"rgba(255,255,255,0.54)",
 			zIndex:"0",
 		});
-		
-		
+
+
 	});
 	</script>
 
 		<style>
-         @import url(./css/load.css);
+		 @import url(./css/load.css);
 			.center {
 				text-align: center;
 				background-color: rbga(255 , 255 , 255 , 0.8);
 				color: gray;
 			}
-			
+
 			body {
 				/*background-image: url(http://7xpoj6.com1.z0.glb.clouddn.com/%28105%29.jpg);*/
 				background-color: white;
 				background-repeat: no-rerpeat;
 				background-attachment: fixed;
 			}
-			
-			a:link , 
-			a:visited , 
-			a:hover , 
+
+			a:link ,
+			a:visited ,
+			a:hover ,
 			a:active {
 				color: #4ABDFF;
 				text-decoration:none;
 			}
 
-	
-		.sider{
-			width:17%;
-			height:100%;
-			position:absolute;
-			left:0;
-			top:0;
-			margin:0;
-			border:0;
-			box-shadow:3px 1px 4px 0px rgba(0,0,0,0.67);
-			background-color:grey;
-			/*background-image:url("./1.png");*/
-			background-repeat:no-repeat;
-			background-position:center;
-			text-align:center;
-		}
-		
-		.nav{
-			height:8%;
-			background-color: black;
-			color:white;
-			align:center;
-			font-size:1.68em;
-			box-shadow:none;
-			padding-top:5%;
-			z-index:1;
-		}
-		
-		.nav:hover ,
-		.nav:active{
-			background-color:#2f2f2f;
-			box-shadow:1px 3px 4px 0px rgba(0,0,0,0.67);
-		}
-		
-		#DateTime{
-			position:absolute;
-			text-align:center;
-			left:37%;
-			top:30%;
-			font-size:10em;
-			text-shadow:3px 3px 13px rgba(0, 0, 0, 0.54);
-			z-index:-1;
-		}
-		
-		.infobox{
-			height:30%;
-			width:30%;
-			position:absolute;
-			margin:1.5em;
-		}
-		#1{
-			left: 20%;
-		}
-		#2{
-		}
-		#3{
-		}
-		#4{
-		}
-		
-		.headimg{
-			width:17%;
-			height:auto;
-		}
+			.infobox{
+				height:16em;
+				width:30%;
+				position:absolute;
+				margin:2em;
+				background-color: grey;
+				box-shadow:3px 1px 4px 0px rgba(0,0,0,0.67);
+				/*background-image:url("./1.png");*/
+				background-repeat:no-repeat;
+				background-position:center;
+				text-align:center;
+			}
+			#one{
+				left: 18%;
+				top: 15%;
+			}
+			#two{
+				right: 18%;
+				top: 15%;
+			}
+			#three{
+				left: 18%;
+				bottom:15%;
+			}
+			#four{
+				right: 18%;
+				bottom:15%;
+			}
+
+			.headimg{
+				width:17%;
+				height:auto;
+			}
+
+			.title{
+				color:black;
+				text-align: center;
+				font-size: 2em;
+				background-color: rgba(255,255,255,0.6);
+				width: 10%;
+				height:100%
+				font
+			}
+
+			.en{
+				font-size: 2em;
+				left: 4%;
+				position: absolute;
+				margin-top: 6%;
+			}
+			.zh{
+				font-size: 0.8em;
+				color: grey;
+				right: 4%;
+				position: absolute;
+				margin-top: 2%;
+			}
 		</style>
-		
+
 	</head>
 	<body onload="loaded()">
 		<!--load animate-->
-        <div id="wrapper"> <!--Use for load-->
-                <div class="loader overlay"></div>
-                <div style="
-                        background-color:white;
-                        position: absolute;
-                        z-index: 9999998;
-                        height:100000%;
-                        width:100000%;">
-                </div>
-        </div>
-        <!--load animate END-->
-		<div id="DateTime">
-		
+		<div id="wrapper"> <!--Use for load-->
+				<div class="loader overlay"></div>
+				<div style="background-color:white;position: absolute;z-index: 9999998;height:100000%;width:100000%;">
+				</div>
 		</div>
-	<div class="sider">
-		<div style="
-			margin:5%;
-		">
-
-			<img  src="https://res.cloudinary.com/duquoda8z/image/fetch/f_png,bo_5px_solid_grey,h_200,w_200,r_max,c_fill/https://static.mengniang.org/common/d/de/Kinoshita_Hideyoshi.jpg"/>
-
-			<div style="
-				color:grey;
-				top:10%;
-				margin:2%;
-				font-size:2.5em;
-			">
+		<!--load animate END-->
+			<!--
+				img  src="https://res.cloudinary.com/duquoda8z/image/fetch/f_png,bo_5px_solid_grey,h_200,w_200,r_max,c_fill/https://static.mengniang.org/common/d/de/Kinoshita_Hideyoshi.jpg"
+			--->
+			<div style="color:grey;top:10%;margin:2%;font-size:2.5em;">
 			Gerard
 			</div>
+
+
+		<div class="infobox" id="one">
+			<div class="title">
+				我的博客
+			</div>
 		</div>
-	</div>
-	<div class="white"></div>
-	
-		<div class="infobox">1</div>
-		<div class="infobox">2</div>
+		<div class="infobox" id="two">2</div>
 		<br/>
-		<div class="infobox">3</div>
-		<div class="infobox">4</div>
-       </body>
+		<div class="infobox" id="three">3</div>
+		<div class="infobox" id="four">4</div>
+	   </body>
