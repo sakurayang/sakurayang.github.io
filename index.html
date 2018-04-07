@@ -60,6 +60,8 @@
 
 
 	});
+
+
 	</script>
 
 		<style>
@@ -86,7 +88,7 @@
 			}
 
 			.infobox{
-				height:16em;
+				height:30%;
 				width:30%;
 				position:absolute;
 				margin:2em;
@@ -98,20 +100,20 @@
 				text-align:center;
 			}
 			#one{
-				left: 18%;
-				top: 15%;
+				left: 17%;
+				top: 17%;
 			}
 			#two{
-				right: 18%;
-				top: 15%;
+				right: 17%;
+				top: 17%;
 			}
 			#three{
-				left: 18%;
-				bottom:15%;
+				left: 17%;
+				bottom:10%;
 			}
 			#four{
-				right: 18%;
-				bottom:15%;
+				right: 17%;
+				bottom:10%;
 			}
 
 			.headimg{
@@ -125,8 +127,9 @@
 				font-size: 2em;
 				background-color: rgba(255,255,255,0.6);
 				width: 10%;
-				height:100%
-				font
+				height:100%;
+				writing-mode: vertical-lr;
+				padding-left: 2%;
 			}
 
 			.en{
@@ -141,6 +144,12 @@
 				right: 4%;
 				position: absolute;
 				margin-top: 2%;
+			}
+			.subtitle{
+				color:gray;
+				writing-mode: vertical-rl;
+				visibility: hidden;
+				display: none;
 			}
 		</style>
 
@@ -160,14 +169,31 @@
 			Gerard
 			</div>
 
-
-		<div class="infobox" id="one">
-			<div class="title">
-				我的博客
-			</div>
+		<div id="infoText">
+			<infobox
+				v-for="item in groceryList"
+				v-bind:info="item"
+				v-bind:key="item.id">
+			</infobox>
 		</div>
-		<div class="infobox" id="two">2</div>
-		<br/>
-		<div class="infobox" id="three">3</div>
-		<div class="infobox" id="four">4</div>
+
+		<script type="text/javascript">
+			Vue.component('infobox', {
+				props: ['info'],
+				template: '<div class="infobox" :id="info.enid" :style=info.image><div class="title">{{ info.title }}<span class="subtitle">{{ info.subTitle }}</span></div></div>'
+			});
+
+			var infoText = new Vue({
+				el: '#infoText',
+				data: {
+					groceryList:[
+						{ id: 0, enid:'one', title:'Blog', subTitle:'博客', image:'background-image:url(./1.jpg)'},
+						{ id: 1, enid:'two', title:'About me', subTitle:'关于我', image:'background-image:url(./1.jpg)'},
+						{ id: 2, enid:'three', title:'Collections', subTitle:'龍ヶ嬢七々々', image:'background-image:url(./1.jpg)'},
+						{ id: 3, enid:'four', title:'Friends', subTitle:'友達', image:'background-image:url(./1.jpg)'},
+					]
+				}
+			});
+
+		</script>
 	   </body>
