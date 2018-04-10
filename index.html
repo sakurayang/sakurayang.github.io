@@ -19,7 +19,7 @@
 		<script type="text/javascript" src="./js/jquery.cloudinary.js"></script>-->
 
 	<script type="text/javascript">
-		load("个人主页");
+		load("这只是一个个人主页");
 		var hei=document.documentElement.clientHeight.toString();
 		var wid=document.documentElement.clientWidth.toString();
 
@@ -73,7 +73,7 @@
 			}
 
 			body {
-				/*background-image: url(http://7xpoj6.com1.z0.glb.clouddn.com/%28105%29.jpg);*/
+				background-image: url(http://7xpoj6.com1.z0.glb.clouddn.com/62505137_p0.png);
 				background-color: white;
 				background-repeat: no-rerpeat;
 				background-attachment: fixed;
@@ -92,7 +92,7 @@
 				width:30%;
 				position:absolute;
 				margin:2em;
-				background-color: grey;
+				/*background-color: grey;*/
 				box-shadow:3px 1px 4px 0px rgba(0,0,0,0.67);
 				/*background-image:url("./1.png");*/
 				background-repeat:no-repeat;
@@ -151,6 +151,37 @@
 				visibility: hidden;
 				display: none;
 			}
+			.name{
+				position:absolute;
+				left:0;
+				bottom:0;
+				font-size:0.8em;
+				color:white;
+				background-color:rgba(255,255,255,0.4);
+				padding:0.5em;
+			}
+			.topnav{
+				position:absolute;
+				width:100%;
+				top:0;
+				left:0;				
+				text-align:center;
+				background-color:rgba(255,255,255,0.3);
+			}
+			.top{
+				position:relative;
+				color:black;
+				font-size:2.5em;
+				text-align:center;
+			}
+			.subtitle2{
+				position:absolute;
+				color:black;
+				font-size:0.8em;
+				text-align:center;
+				margin-left:0.5em;
+				bottom:0;
+			}
 		</style>
 
 	</head>
@@ -165,10 +196,11 @@
 			<!--
 				img  src="https://res.cloudinary.com/duquoda8z/image/fetch/f_png,bo_5px_solid_grey,h_200,w_200,r_max,c_fill/https://static.mengniang.org/common/d/de/Kinoshita_Hideyoshi.jpg"
 			--->
-			<div style="color:grey;top:10%;margin:2%;font-size:2.5em;">
-			Gerard
+			<div class="topnav">
+			<span class="top">Gerard</span>
+			<span class="subtitle2">女装控/伪娘控/懒癌发作的程序员</span>
 			</div>
-
+				
 		<div id="infoText">
 			<infobox
 				v-for="item in groceryList"
@@ -194,6 +226,9 @@
 					]
 				}
 			});
-
 		</script>
+		<div class="name">
+			背景图：<a href="https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62505137">Pixiv:62505137</a><br/>
+			作者：<a href="https://www.pixiv.net/member.php?id=4742132">るいせんと:お仕事募集中</a>
+		</div>
 	   </body>
