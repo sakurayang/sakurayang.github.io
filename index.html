@@ -212,17 +212,17 @@
 		<script type="text/javascript">
 			Vue.component('infobox', {
 				props: ['info'],
-				template: '<div class="infobox" :id="info.enid" :style=info.image><div class="title">{{ info.title }}<span class="subtitle">{{ info.subTitle }}</span></div></div>'
+				template: '<a :href="info.url"><div class="infobox" :id="info.enid" :style=info.image><div class="title">{{ info.title }}<span class="subtitle">{{ info.subTitle }}</span></div></div></a>'
 			});
 
 			var infoText = new Vue({
 				el: '#infoText',
 				data: {
 					groceryList:[
-						{ id: 0, enid:'one', title:'Blog', subTitle:'博客', image:'background-image:url(./1.jpg)'},
-						{ id: 1, enid:'two', title:'About me', subTitle:'关于我', image:'background-image:url(./1.jpg)'},
-						{ id: 2, enid:'three', title:'Collections', subTitle:'龍ヶ嬢七々々', image:'background-image:url(./1.jpg)'},
-						{ id: 3, enid:'four', title:'Friends', subTitle:'友達', image:'background-image:url(./1.jpg)'},
+						{ id: 0, url:'./blog', enid:'one', title:'Blog', subTitle:'博客', image:'background-image:url(./1.jpg)'},
+						{ id: 1, url:'./about.html', enid:'two', title:'About me', subTitle:'关于我', image:'background-image:url(./1.jpg)'},
+						{ id: 2, url:'./collrctions.html', enid:'three', title:'Collections', subTitle:'龍ヶ嬢七々々', image:'background-image:url(./1.jpg)'},
+						{ id: 3, url:'./friends.html', enid:'four', title:'Friends', subTitle:'友達', image:'background-image:url(./1.jpg)'},
 					]
 				}
 			});
