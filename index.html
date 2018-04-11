@@ -99,6 +99,7 @@
 				background-position:center;
 				text-align:center;
 			}
+
 			#one{
 				left: 17%;
 				top: 17%;
@@ -120,37 +121,38 @@
 				width:17%;
 				height:auto;
 			}
-
-			.title{
-				color:black;
-				text-align: center;
-				font-size: 2em;
-				background-color: rgba(255,255,255,0.6);
+			.titlebox{
 				width: 10%;
 				height:100%;
-				writing-mode: vertical-lr;
 				padding-left: 2%;
+				padding-top:0;
+				text-align: center;
+				background-color: rgba(255,255,255,0.6);
+				transition: 0.6s;
+				transform-style: preserve-3d;
+				position: relative;
 			}
-
-			.en{
-				font-size: 2em;
-				left: 4%;
-				position: absolute;
-				margin-top: 6%;
+			.titlebox:hover{
+				transform: rotateY(180deg);
 			}
-			.zh{
-				font-size: 0.8em;
-				color: grey;
-				right: 4%;
-				position: absolute;
-				margin-top: 2%;
+			.title{
+				z-index: 2;
 			}
 			.subtitle{
-				color:gray;
-				writing-mode: vertical-rl;
-				visibility: hidden;
-				display: none;
+				transform: rotateY(180deg);
 			}
+			.title, .subtitle{
+				top:0;
+				position:absolute;
+				color:black;
+				font-size: 2em;
+				writing-mode: vertical-lr;
+				backface-visibility: hidden;
+				height:100%;
+				left:2%;
+			}
+
+			
 			.name{
 				position:absolute;
 				left:0;
@@ -182,9 +184,7 @@
 				margin-left:0.5em;
 				bottom:0;
 			}
-            
-            
-            
+                
 		</style>
 
 	</head>
@@ -215,7 +215,7 @@
 		<script type="text/javascript">
 			Vue.component('infobox', {
 				props: ['info'],
-				template: '<a :href="info.url"><div class="infobox" :id="info.enid" :style=info.image><div class="title">{{ info.title }}<span class="subtitle">{{ info.subTitle }}</span></div></div></a>'
+				template: '<a :href="info.url"><div class="infobox" :id="info.enid" :style=info.image><div class="titlebox"><span class="title">{{ info.title }}</span><span class="subtitle">{{ info.subTitle }}</span></div></div></a>'
 			});
 
 			var infoText = new Vue({
@@ -224,7 +224,7 @@
 					groceryList:[
 						{ id: 0, url:'./blog', enid:'one', title:'Blog', subTitle:'博客', image:'background-image:url(./1.jpg)'},
 						{ id: 1, url:'./about.html', enid:'two', title:'About me', subTitle:'关于我', image:'background-image:url(./1.jpg)'},
-						{ id: 2, url:'./collrctions.html', enid:'three', title:'Collections', subTitle:'龍ヶ嬢七々々', image:'background-image:url(./1.jpg)'},
+						{ id: 2, url:'./collections.html', enid:'three', title:'Collections', subTitle:'龍ヶ嬢七々々', image:'background-image:url(./1.jpg)'},
 						{ id: 3, url:'./friends.html', enid:'four', title:'Friends', subTitle:'友達', image:'background-image:url(./1.jpg)'},
 					]
 				}
