@@ -72,35 +72,40 @@
 			.titlebox{
 				width: 10%;
 				height:100%;
-				padding-left: 2%;
 				padding-top:0;
+				padding-bottom: 0;
 				text-align: center;
 				background-color: rgba(255,255,255,0.6);
 				transition: 0.6s;
 				transform-style: preserve-3d;
 				position: relative;
+				padding-right: 2%;
 			}
 			.titlebox:hover{
 				transform: rotateY(180deg);
 			}
 			.title{
 				z-index: 2;
+				transform: rotateY(360deg);
+				writing-mode: vertical-lr;
 			}
 			.subtitle{
 				transform: rotateY(180deg);
+				writing-mode: vertical-rl;
 			}
 			.title, .subtitle{
 				top:0;
 				position:absolute;
 				color:black;
 				font-size: 2em;
-				writing-mode: vertical-lr;
+
+				-moz-backface-visibility: hidden;
 				backface-visibility: hidden;
 				height:100%;
-				left:2%;
+				right:15%;
 			}
 
-			
+
 			.name{
 				position:absolute;
 				left:0;
@@ -114,7 +119,7 @@
 				position:absolute;
 				width:100%;
 				top:0;
-				left:0;				
+				left:0;
 				text-align:center;
 				background-color:rgba(255,255,255,0.3);
 			}
@@ -132,7 +137,7 @@
 				margin-left:0.5em;
 				bottom:0;
 			}
-                
+
 		</style>
 
 	</head>
@@ -149,7 +154,7 @@
 			<span class="top">Gerard</span>
 			<span class="subtitle2">女装控/伪娘控/懒癌发作的程序员</span>
 			</div>
-				
+
 		<div id="infoText">
 			<infobox
 				v-for="item in groceryList"
