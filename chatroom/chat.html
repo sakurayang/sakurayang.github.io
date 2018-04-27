@@ -24,6 +24,11 @@
 			var img = "img";
 			var username = null;
 			
+			function send() {
+				var message=$(".userInput");
+				msg(message.val(),"#bdae9d","null","text");
+				message.val("");
+			}
 			
 			function clearMsg(password) {
 				var password_sha = CryptoJS.SHA256(password).toString();
@@ -104,7 +109,6 @@
 			}
 			
 			var config = {
-				authDomain: "https://wd6413466545jrbfqv.wilddog.com",
 				syncURL: "https://wd6413466545jrbfqv.wilddogio.com"};
 			wilddog.initializeApp(config);
 			var chat = wilddog.sync().ref("/chat");
@@ -411,8 +415,33 @@
 					display:none !important;   
 				}   
 			}
-
-
+			
+			.input{
+				z-index: 9999;
+				position: absolute;
+				width: 100%;
+				height: 1.5em;
+				bottom: 0;
+				margin: 0;
+				left: 0;
+				background: white;
+			}
+			.userInput{
+				width:90%;
+				height:100%;
+				bottom: 0;
+				margin: 0;
+				left: 0;
+				border:0;
+			}
+			.clickbutton{
+				width:10%;
+				height:100%;
+				bottom: 0;
+				margin: 0;
+				right: 0;
+				border:0;
+			}
 		</style>
     </head>
 	<body onload="loaded()">
@@ -422,6 +451,7 @@
 	<hr />
 	<br />
 	<div class="chatmsg"></div>
+	<div class="input"><input class="userInput"></input><button class="clickbutton" type="button" onclick="send()">SEND!!</button></div>
 	<div class="FloatWindow" onclick="CloseFloatImg()"></div>
 
 	<script>
