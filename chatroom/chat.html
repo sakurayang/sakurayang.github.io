@@ -115,14 +115,14 @@
 			
 			function reg(username,password) {
 				var userRoot = wilddog.sync().ref("/users");
-				var password_sha = CryptoJS.SHA256(password).toString();
+				var password_sha = CryptoJS.SHA256(password).toString();/*SHA256加密*/
 				userRoot.once("value")
 					.then(function(snapshot) {
 						var name = snapshot.child("/"+username).exists();
 						if (name == false) {
 							userRoot.child("/"+username).set({
 							"name":username,
-							"password":password_sha,
+							"password":password_sha,/*只发送密文*/
 							"regTime":new Date().toString(),
 							"LastLogin":getTime(),
 							"regIP":returnCitySN["cip"],
@@ -148,7 +148,7 @@
 				userRoot.once("value")
 					.then(function(snapshot) {
 						var name = snapshot.child("/"+username).exists();
-						var password_sha = snapshot.child("/"+username+"/password").val();
+						var password_sha = snapshot.child("/"+username+"/password").val();/*获取服务端储存的密文*/
 						var profileFloder = snapshot.child("/"+username+"/profile/");
 						var userTextColor = profileFloder.child("color/textColor").val();
 						var userBackgroundColor = profileFloder.child("color/bgColor").val();
@@ -160,7 +160,7 @@
 							tip("未注册","red");
 						} else if (password == null || password == ""){
 							console.error("请输入密码");
-						} else if (password_sha == CryptoJS.SHA256(password).toString()){
+						} else if (password_sha == CryptoJS.SHA256(password).toString()){/*验证密文是否相同*/
 							window.username = username;
 							console.log(""+username+":现在是"+getTime()+",祝你玩得开心");
 							console.info(infomsg);
