@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="content-Type" content="text/html; charset=utf-8">
+		<title>Loding...</title>
+		<script type="text/javascript" src="./js/load.js"></script>
+		<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="./js/vue-debug.js"></script>
+
+
+	<script type="text/javascript">
+		load("僕わ変態");
+
+
+	</script>
+
+		<style>
+		 @import url(./css/load.css);
+			.center {
+				text-align: center;
+				background-color: rbga(255 , 255 , 255 , 0.8);
+				color: gray;
+			}
+
+			a:link ,
+			a:visited ,
+			a:hover ,
+			a:active {
+				color: unset;
+				text-decoration:none;
+			}
+			.topnav{
+				position:absolute;
+				top:65%;
+				left:50%;
+				text-align:center;
+				transform: translate(-50%,-300%);
+
+			}
+			.top{
+				position:relative;
+				color:black;
+				font-size:2.5em;
+				text-align:center;
+				background:#fffc;
+				transform: translate(-43%,1%);
+				top: 50%;
+				left: 50%;
+			
+			}
+			
+			.subtitle2{
+				position:absolute;
+				color: rgba(0,0,0,0);
+				font-size:0.8em;
+				text-align:center;
+				margin-top:0.2em;
+				right:50%;
+			}
+			
+			.someword{
+				left: 50%;
+				text-align: center;
+				z-index: 99999999999;
+				position: absolute;
+				top: 50%;
+				transform: translate(-45%,300%);
+				font-size: 1.56em;
+			}
+			
+			.menu, .menuback{
+			    position: absolute;
+				bottom: 25%;
+				left: 50%;
+				text-align: center;
+				transform: translate(-50%,0%);
+				font-size: 1.32em;
+			}
+			.menu{
+				z-index:30;
+				font-style: italic;
+				color:grey
+			}
+			.menuback{
+				z-index: 10;
+				transform: translate(-51%,95%);
+				margin-left: 0.2em;
+				margin-right: 0.2em;
+			}
+			.sel, .selback{
+				margin-left: 3em;
+				margin-right: 3em;
+				position: relative;
+				visibility:visible;
+			}
+			
+
+			
+
+		</style>
+	</head>
+	<body onload="loaded()">
+		<!--load animate-->
+		<div id="wrapper"> <!--Use for load-->
+				<div class="loader overlay"></div>
+				<div style="background-color:white;position: absolute;z-index: 9999998;height:100%;width:100%;top:0;left:0;">
+				</div>
+		</div>
+		<!--load animate END-->
+		<div class="topnav">
+			<img src="http://saikou.ufile.ucloud.com.cn/image%2Ffount.png" title="听说按Ctrl+A有惊喜" style="z-index:1;position: absolute;transform: translate(-49%,-44%);top: 50%;left: 50%;"/>
+			<div class="top" title="听说按Ctrl+A有惊喜">Gerardの変態page</div>
+			<img src="http://saikou.ufile.ucloud.com.cn/image%2Fback.png" style="z-index:-1;position: absolute;transform: translate(-43.5%,-77.5%);left: 50%;top: 50%;"/>
+			<div class="subtitle2" title="嘘~~">女装控/伪娘控/懒癌发作的程序员</div>
+		</div>
+		<p class='someword'>女孩子的胖次，看得见还是看不见呢</p>
+		<div class='menu'>
+			<a href='./working.html'><span class="sel">Blog</span></a>
+			<a href='./working.html'><span class="sel">About</span></a>
+			<a href='./working.html'><span class="sel">Colletcions</span></a>
+			<a href='./working.html'><span class="sel">Friends</span></a>
+			
+		</div>	
+		<div class='menuback'>
+			<a href='./working.html'><span class="selback">博客</span></a>
+			<a href='./working.html'><span class="selback">说明书</span></a>
+			<a href='./working.html'><span class="selback">龍ヶ嬢七々々</span></a>
+			<a href='./working.html'><span class="selback">友達</span></a>
+		</div>
+			
+			
+			
+			
+<!--
+
+
+			<div id="infoText" class="content" style="height:100%;min-height:100%;width:100%;min-width:100%;">
+				<infobox
+					v-for="item in groceryList"
+					v-bind:info="item"
+					v-bind:key="item.id">
+				</infobox>
+			</div>
+
+		<script type="text/javascript">
+			document.body.style.background=hex;
+			Vue.component('infobox', {
+				props: ['info'],
+				template: '<a :href="info.url"><div class="infobox" :id="info.enid" :style=info.image><div class="titlebox"><span class="title">{{ info.title }}</span><span class="subtitle">{{ info.subTitle }}</span></div></div></a>'
+			});
+
+			var infoText = new Vue({
+				el: '#infoText',
+				data: {
+					groceryList:[
+						{ id: 0, url:'./working.html', enid:'one', title:'Blog', subTitle:'博客', image:'background-image:url(./1.jpg)'},
+						{ id: 1, url:'./working.html', enid:'two', title:'About me', subTitle:'关于我', image:'background-image:url(./1.jpg)'},
+						{ id: 2, url:'./working.html', enid:'three', title:'Collections', subTitle:'龍ヶ嬢七々々', image:'background-image:url(./1.jpg)'},
+						{ id: 3, url:'./working.html', enid:'four', title:'Friends', subTitle:'友達', image:'background-image:url(./1.jpg)'},
+					]
+				}
+			});
+		</script>
+-->
+	   </body>

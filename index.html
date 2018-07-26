@@ -48,7 +48,6 @@
 				background-position:center;
 				text-align:center;
 			}
-
 			#one{
 				left: 17%;
 				top: 17%;
@@ -138,6 +137,9 @@
 				margin-left:0.5em;
 				bottom:0;
 			}
+			.content{
+
+			}
 
 		</style>
 
@@ -146,23 +148,23 @@
 		<!--load animate-->
 		<div id="wrapper"> <!--Use for load-->
 				<div class="loader overlay"></div>
-				<div style="background-color:white;position: absolute;z-index: 9999998;height:100000%;width:100000%;">
+				<div style="background-color:white;position: absolute;z-index: 9999998;height:100%;width:100%;top:0;left:0;">
 				</div>
 		</div>
 		<!--load animate END-->
 
-			<div class="topnav">
-			<span class="top" title="听说按Ctrl+A有惊喜">Gerardの主页</span>
-			<span class="subtitle2">女装控/伪娘控/懒癌发作的程序员</span>
-			</div>
-
-		<div id="infoText">
-			<infobox
-				v-for="item in groceryList"
-				v-bind:info="item"
-				v-bind:key="item.id">
-			</infobox>
+		<div class="topnav">
+		<span class="top" title="听说按Ctrl+A有惊喜">Gerardの主页</span>
+		<span class="subtitle2">女装控/伪娘控/懒癌发作的程序员</span>
 		</div>
+
+			<div id="infoText" class="content">
+				<infobox
+					v-for="item in groceryList"
+					v-bind:info="item"
+					v-bind:key="item.id">
+				</infobox>
+			</div>
 
 		<script type="text/javascript">
 			Vue.component('infobox', {
@@ -181,6 +183,14 @@
 					]
 				}
 			});
+
+			/*$(document).ready($("#infoText").css({
+				position:relative,
+				width:100%,
+				minWidth:100%,
+				height:100%,
+				minHeight:100%,
+			}););*/
 		</script>
 		<div class="name">
 			背景图：<a href="https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62505137">Pixiv:62505137</a><br/>
