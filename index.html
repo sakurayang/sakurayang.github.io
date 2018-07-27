@@ -9,7 +9,9 @@
 
 
 	<script type="text/javascript">
-		load("这只是一个个人主页");
+		load("僕わ変態");
+
+
 	</script>
 
 		<style>
@@ -20,129 +22,82 @@
 				color: gray;
 			}
 
-			body {
-				background-image: url(http://7xpoj6.com1.z0.glb.clouddn.com/62505137_p0.png);
-				background-color: white;
-				background-repeat: no-rerpeat;
-				background-attachment: fixed;
-				background-size: cover;
-			}
-
 			a:link ,
 			a:visited ,
 			a:hover ,
 			a:active {
-				color: #4ABDFF;
+				color: unset;
 				text-decoration:none;
-			}
-
-			.infobox{
-				height:30%;
-				width:30%;
-				position:absolute;
-				margin:2em;
-				/*background-color: grey;*/
-				box-shadow:3px 1px 4px 0px rgba(0,0,0,0.67);
-				/*background-image:url("./1.png");*/
-				background-repeat:no-repeat;
-				background-position:center;
-				text-align:center;
-			}
-			#one{
-				left: 17%;
-				top: 17%;
-			}
-			#two{
-				right: 17%;
-				top: 17%;
-			}
-			#three{
-				left: 17%;
-				bottom:10%;
-			}
-			#four{
-				right: 17%;
-				bottom:10%;
-			}
-
-			.headimg{
-				width:17%;
-				height:auto;
-			}
-			.titlebox{
-				width: 10%;
-				height:100%;
-				padding-top:0;
-				padding-bottom: 0;
-				text-align: center;
-				background-color: rgba(255,255,255,0.6);
-				transition: 0.6s;
-				transform-style: preserve-3d;
-				position: relative;
-				padding-right: 2%;
-			}
-			.titlebox:hover{
-				transform: rotateY(180deg);
-			}
-			.title{
-				z-index: 2;
-				transform: rotateY(360deg);
-				writing-mode: vertical-lr;
-			}
-			.subtitle{
-				transform: rotateY(180deg);
-				writing-mode: vertical-rl;
-			}
-			.title, .subtitle{
-				top:0;
-				position:absolute;
-				color:black;
-				font-size: 2em;
-
-				-moz-backface-visibility: hidden;
-				backface-visibility: hidden;
-				height:100%;
-				right:15%;
-			}
-
-
-			.name{
-				position:absolute;
-				left:0;
-				bottom:0;
-				font-size:0.8em;
-				color:white;
-				background-color:rgba(255,255,255,0.4);
-				padding:0.5em;
 			}
 			.topnav{
 				position:absolute;
-				width:100%;
-				top:0;
-				left:0;
+				top:65%;
+				left:50%;
 				text-align:center;
-				background-color:rgba(255,255,255,0.3);
+				transform: translate(-50%,-300%);
+
 			}
 			.top{
 				position:relative;
 				color:black;
 				font-size:2.5em;
 				text-align:center;
+				background:#fffc;
+				transform: translate(-43%,1%);
+				top: 50%;
+				left: 50%;
+			
 			}
+			
 			.subtitle2{
 				position:absolute;
 				color: rgba(0,0,0,0);
 				font-size:0.8em;
 				text-align:center;
-				margin-left:0.5em;
-				bottom:0;
+				margin-top:0.2em;
+				right:50%;
 			}
-			.content{
+			
+			.someword{
+				left: 50%;
+				text-align: center;
+				z-index: 99999999999;
+				position: absolute;
+				top: 50%;
+				transform: translate(-45%,300%);
+				font-size: 1.56em;
+			}
+			
+			.menu, .menuback{
+			    position: absolute;
+				bottom: 25%;
+				left: 50%;
+				text-align: center;
+				transform: translate(-50%,0%);
+				font-size: 1.32em;
+			}
+			.menu{
+				z-index:30;
+				font-style: italic;
+				color:grey
+			}
+			.menuback{
+				z-index: 10;
+				transform: translate(-51%,95%);
+				margin-left: 0.2em;
+				margin-right: 0.2em;
+			}
+			.sel, .selback{
+				margin-left: 3em;
+				margin-right: 3em;
+				position: relative;
+				visibility:visible;
+			}
+			
 
-			}
+			
 
 		</style>
-
 	</head>
 	<body onload="loaded()">
 		<!--load animate-->
@@ -152,48 +107,26 @@
 				</div>
 		</div>
 		<!--load animate END-->
-
 		<div class="topnav">
-		<span class="top" title="听说按Ctrl+A有惊喜">Gerardの主页</span>
-		<span class="subtitle2">女装控/伪娘控/懒癌发作的程序员</span>
+			<img src="http://saikou.ufile.ucloud.com.cn/image%2Ffount.png" title="听说按Ctrl+A有惊喜" style="z-index:1;position: absolute;transform: translate(-49%,-44%);top: 50%;left: 50%;"/>
+			<div class="top" title="听说按Ctrl+A有惊喜">Gerardの変態page</div>
+			<img src="http://saikou.ufile.ucloud.com.cn/image%2Fback.png" style="z-index:-1;position: absolute;transform: translate(-43.5%,-77.5%);left: 50%;top: 50%;"/>
+			<div class="subtitle2" title="嘘~~">女装控/伪娘控/懒癌发作的程序员</div>
 		</div>
-
-			<div id="infoText" class="content">
-				<infobox
-					v-for="item in groceryList"
-					v-bind:info="item"
-					v-bind:key="item.id">
-				</infobox>
-			</div>
-
-		<script type="text/javascript">
-			Vue.component('infobox', {
-				props: ['info'],
-				template: '<a :href="info.url"><div class="infobox" :id="info.enid" :style=info.image><div class="titlebox"><span class="title">{{ info.title }}</span><span class="subtitle">{{ info.subTitle }}</span></div></div></a>'
-			});
-
-			var infoText = new Vue({
-				el: '#infoText',
-				data: {
-					groceryList:[
-						{ id: 0, url:'./working.html', enid:'one', title:'Blog', subTitle:'博客', image:'background-image:url(./1.jpg)'},
-						{ id: 1, url:'./working.html', enid:'two', title:'About me', subTitle:'关于我', image:'background-image:url(./1.jpg)'},
-						{ id: 2, url:'./working.html', enid:'three', title:'Collections', subTitle:'龍ヶ嬢七々々', image:'background-image:url(./1.jpg)'},
-						{ id: 3, url:'./working.html', enid:'four', title:'Friends', subTitle:'友達', image:'background-image:url(./1.jpg)'},
-					]
-				}
-			});
-
-			/*$(document).ready($("#infoText").css({
-				position:relative,
-				width:100%,
-				minWidth:100%,
-				height:100%,
-				minHeight:100%,
-			}););*/
-		</script>
-		<div class="name">
-			背景图：<a href="https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62505137">Pixiv:62505137</a><br/>
-			作者：<a href="https://www.pixiv.net/member.php?id=4742132">るいせんと:お仕事募集中</a>
+		<p class='someword'>女孩子的胖次，看得见还是看不见呢</p>
+		<div class='menu'>
+			<a href='./working.html'><span class="sel">Blog</span></a>
+			<a href='./about.html'><span class="sel">About</span></a>
+			<a href='./working.html'><span class="sel">Colletcions</span></a>
+			<a href='./working.html'><span class="sel">Friends</span></a>
+			
+		</div>	
+		<div class='menuback'>
+			<a href='./working.html'><span class="selback">博客</span></a>
+			<a href='./about.html'><span class="selback">说明书</span></a>
+			<a href='./working.html'><span class="selback">龍ヶ嬢七々々</span></a>
+			<a href='./working.html'><span class="selback">友達</span></a>
 		</div>
+			
+
 	   </body>

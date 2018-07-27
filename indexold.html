@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="content-Type" content="text/html; charset=utf-8">
+		<title>Loding...</title>
+		<script type="text/javascript" src="./js/load.js"></script>
+		<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="./js/vue-debug.js"></script>
+
+
+	<script type="text/javascript">
+		load("这只是一个个人主页");
+	</script>
+
+		<style>
+		 @import url(./css/load.css);
+			.center {
+				text-align: center;
+				background-color: rbga(255 , 255 , 255 , 0.8);
+				color: gray;
+			}
+
+			body {
+				background-image: url(http://7xpoj6.com1.z0.glb.clouddn.com/62505137_p0.png);
+				background-color: white;
+				background-repeat: no-rerpeat;
+				background-attachment: fixed;
+				background-size: cover;
+			}
+
+			a:link ,
+			a:visited ,
+			a:hover ,
+			a:active {
+				color: #4ABDFF;
+				text-decoration:none;
+			}
+
+			.infobox{
+				height:30%;
+				width:30%;
+				position:absolute;
+				margin:2em;
+				/*background-color: grey;*/
+				box-shadow:3px 1px 4px 0px rgba(0,0,0,0.67);
+				/*background-image:url("./1.png");*/
+				background-repeat:no-repeat;
+				background-position:center;
+				text-align:center;
+			}
+			#one{
+				left: 17%;
+				top: 17%;
+			}
+			#two{
+				right: 17%;
+				top: 17%;
+			}
+			#three{
+				left: 17%;
+				bottom:10%;
+			}
+			#four{
+				right: 17%;
+				bottom:10%;
+			}
+
+			.headimg{
+				width:17%;
+				height:auto;
+			}
+			.titlebox{
+				width: 10%;
+				height:100%;
+				padding-top:0;
+				padding-bottom: 0;
+				text-align: center;
+				background-color: rgba(255,255,255,0.6);
+				transition: 0.6s;
+				transform-style: preserve-3d;
+				position: relative;
+				padding-right: 2%;
+			}
+			.titlebox:hover{
+				transform: rotateY(180deg);
+			}
+			.title{
+				z-index: 2;
+				transform: rotateY(360deg);
+				writing-mode: vertical-lr;
+			}
+			.subtitle{
+				transform: rotateY(180deg);
+				writing-mode: vertical-rl;
+			}
+			.title, .subtitle{
+				top:0;
+				position:absolute;
+				color:black;
+				font-size: 2em;
+
+				-moz-backface-visibility: hidden;
+				backface-visibility: hidden;
+				height:100%;
+				right:15%;
+			}
+
+
+			.name{
+				position:absolute;
+				left:0;
+				bottom:0;
+				font-size:0.8em;
+				color:white;
+				background-color:rgba(255,255,255,0.4);
+				padding:0.5em;
+			}
+			.topnav{
+				position:absolute;
+				width:100%;
+				top:0;
+				left:0;
+				text-align:center;
+				background-color:rgba(255,255,255,0.3);
+			}
+			.top{
+				position:relative;
+				color:black;
+				font-size:2.5em;
+				text-align:center;
+			}
+			.subtitle2{
+				position:absolute;
+				color: rgba(0,0,0,0);
+				font-size:0.8em;
+				text-align:center;
+				margin-left:0.5em;
+				bottom:0;
+			}
+			.content{
+
+			}
+
+		</style>
+
+	</head>
+	<body onload="loaded()">
+		<!--load animate-->
+		<div id="wrapper"> <!--Use for load-->
+				<div class="loader overlay"></div>
+				<div style="background-color:white;position: absolute;z-index: 9999998;height:100%;width:100%;top:0;left:0;">
+				</div>
+		</div>
+		<!--load animate END-->
+
+		<div class="topnav">
+		<span class="top" title="听说按Ctrl+A有惊喜">Gerardの主页</span>
+		<span class="subtitle2">女装控/伪娘控/懒癌发作的程序员</span>
+		</div>
+
+			<div id="infoText" class="content">
+				<infobox
+					v-for="item in groceryList"
+					v-bind:info="item"
+					v-bind:key="item.id">
+				</infobox>
+			</div>
+
+		<script type="text/javascript">
+			Vue.component('infobox', {
+				props: ['info'],
+				template: '<a :href="info.url"><div class="infobox" :id="info.enid" :style=info.image><div class="titlebox"><span class="title">{{ info.title }}</span><span class="subtitle">{{ info.subTitle }}</span></div></div></a>'
+			});
+
+			var infoText = new Vue({
+				el: '#infoText',
+				data: {
+					groceryList:[
+						{ id: 0, url:'./working.html', enid:'one', title:'Blog', subTitle:'博客', image:'background-image:url(./1.jpg)'},
+						{ id: 1, url:'./working.html', enid:'two', title:'About me', subTitle:'关于我', image:'background-image:url(./1.jpg)'},
+						{ id: 2, url:'./working.html', enid:'three', title:'Collections', subTitle:'龍ヶ嬢七々々', image:'background-image:url(./1.jpg)'},
+						{ id: 3, url:'./working.html', enid:'four', title:'Friends', subTitle:'友達', image:'background-image:url(./1.jpg)'},
+					]
+				}
+			});
+
+			/*$(document).ready($("#infoText").css({
+				position:relative,
+				width:100%,
+				minWidth:100%,
+				height:100%,
+				minHeight:100%,
+			}););*/
+		</script>
+		<div class="name">
+			背景图：<a href="https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62505137">Pixiv:62505137</a><br/>
+			作者：<a href="https://www.pixiv.net/member.php?id=4742132">るいせんと:お仕事募集中</a>
+		</div>
+	   </body>
