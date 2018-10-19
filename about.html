@@ -7,6 +7,7 @@
     <script type="text/javascript" src="./js/load.js"></script>
     <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="./js/vue-debug.js"></script>
+    <script type="text/javascript" src="http://at.alicdn.com/t/font_880237_d9m8vb29rdg.js"></script>
 
     <script type="text/javascript">
         load("关于我");
@@ -80,24 +81,38 @@
         .del:hover {
             color: white
         }
-		
-		div.img{
-			margin:3px;
-			border:3px solid #bebebe;
-			float:left;
-			text-align:center;
-		}
-		div.img img
-		{
-			display:inline;
-			margin:3px;
-			border:1px solid #bebebe;
-		}
-		div.desc
-		{
-			text-align:center;
-			width:auto;
-			font-size:0.8em;
+        
+        div.img {
+            margin: 3px;
+            border: 3px solid #bebebe;
+            float: left;
+            text-align: center;
+        }
+        
+        div.img img {
+            display: inline;
+            margin: 3px;
+            border: 1px solid #bebebe;
+        }
+        
+        div.desc {
+            text-align: center;
+            width: auto;
+            font-size: 0.8em;
+        }
+		.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;}
+		@font-face {
+			font-family: 'iconfont';  /* project id 880237 */
+			src: url('http://at.alicdn.com/t/font_880237_d9m8vb29rdg.eot');
+			src: url('http://at.alicdn.com/t/font_880237_d9m8vb29rdg.eot?#iefix') format('embedded-opentype'),
+			url('http://at.alicdn.com/t/font_880237_d9m8vb29rdg.woff') format('woff'),
+			url('http://at.alicdn.com/t/font_880237_d9m8vb29rdg.ttf') format('truetype'),
+			url('http://at.alicdn.com/t/font_880237_d9m8vb29rdg.svg#iconfont') format('svg');
 		}
     </style>
 
@@ -127,7 +142,7 @@
         高三狗一只，不折腾会死星人，<span class="del" title='你知道的太多了'>秀吉</span>，<span class='del' title='你知道的太多了'>女装大佬</span>，追番死宅，灵魂画手，德国骨科，轮子工
         <ul>技能：
             <li>摸鱼🐟十级</li>
-            <li>国画花鸟九级</li>
+            <li>国画花鸟八级</li>
             <li>Minecraft&nbsp;从入门到在岩浆游泳</li>
             <li>HTML&nbsp;从入门到PHP</li>
             <li>PHP&nbsp;从入门到MySQL</li>
@@ -144,51 +159,55 @@
             <li>WordPress&nbsp;从入门到入土为安</li>
         </ul>
         捕抓方式：(由于每个地区的Gerard会有所不同，请自备相应种类大师球)<br/>
-        <a href='https://github.com/sakurayang'><span>Gayhub&nbsp;&nbsp;&nbsp;</span></a>
-        <a href='https://t.me/Gerardyang'><span>Telegram&nbsp;&nbsp;&nbsp;</span></a>
+        <a href='https://github.com/sakurayang'>
+			<span class="iconfont">&#xe615;</span>
+			<span>Gayhub&nbsp;&nbsp;&nbsp;</span>
+		</a>
+        <a href='https://t.me/Gerardyang'><span class="iconfont">&#xe60f;</span><span>Telegram&nbsp;&nbsp;&nbsp;</span></a>
         <a href='https://etherscan.io/address/0x5bcd9ed826b0ac76ff8b83525aefea9e9ab75d15'><span>ETH&nbsp;&nbsp;&nbsp;</span></a>
-        <span>Discord#7694&nbsp;&nbsp;&nbsp;</span>
-        <a href='https://steamcommunity.com/id/Gerard_yang/'><span>Steam&nbsp;&nbsp;&nbsp;</span></a>
-        <a href='https://space.bilibili.com/24247316/'><span>bilibili&nbsp;&nbsp;&nbsp;</span></a>
-        <a href="mailto:sakurayayang@foxmail.com"><span>mail&nbsp;&nbsp;&nbsp;</span></a>
-		<blockquote>其他特殊方式（如电话，面基）请发邮件到邮箱告诉我详细的理由，如果我有时间并且看到的话会给出回复的</blockquote>
-        <hr />
-		
-		打赏：<br/>
-		<div class="img">
-			<img src="http://saikou.ufile.ucloud.com.cn/image%2FaliPay.jpg" alt="Ballade" width="160" height="160">
-			<div class="desc">
-				支付宝
-		</div>
-		</div>
-		<div class="img">
-			<img src="http://saikou.ufile.ucloud.com.cn/image%2FwePay.jpg" alt="Ballade" width="160" height="160">
-			<div class="desc">
-				微信
-			</div>
-		</div>
-		<div class="img">
-			<img src="data:image/png;base64,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" width="160" height="160">
-			<div class="desc">
-				ETH
-			</div>
-		</div>
-		<div class="img">
-			<div class="desc">
-				你们知道的，靠爱发电没什么钱的，也没有人写开源项目是为了赚钱。<br />
-				目前只买了个域名，页面还是挂在GitPages上（穷orz）<br />
-				一分两分那些就不要发过来的，虽然知道你是在支持我，但是还是免了<br />
-			</div>
-		</div>
-		<p><br/></p>
-		<p><br/></p>
-		<p><br/></p>
-		<p><br/></p>
-		<p><br/></p>
-		<p><br/></p>
-		<p><br/></p>
+        <span><span class="iconfont">&#xeb1e;</span>Discord id:#7694&nbsp;&nbsp;&nbsp;</span>
+        <a href='https://steamcommunity.com/id/Gerard_yang/'><span class="iconfont">&#xe62f;</span><span>Steam&nbsp;&nbsp;&nbsp;</span></a>
+        <a href='https://space.bilibili.com/24247316/'><span class="iconfont">&#xe6e9;</span><span>bilibili&nbsp;&nbsp;&nbsp;</span></a>
+        <a href="mailto:sakurayayang@foxmail.com"><span class="iconfont">&#xe652;</span><span>mail&nbsp;&nbsp;&nbsp;</span></a>
+        <blockquote>其他特殊方式（如电话，面基）请发邮件到邮箱告诉我详细的理由，如果我有时间并且看到的话会给出回复的</blockquote>
+        <hr /> 打赏：
 
-<div style='
+        <br/>
+        <div class="img">
+            <img src="http://saikou.ufile.ucloud.com.cn/image%2FaliPay.jpg" alt="Ballade" width="160" height="160">
+            <div class="desc">
+                支付宝
+            </div>
+        </div>
+        <div class="img">
+            <img src="http://saikou.ufile.ucloud.com.cn/image%2FwePay.jpg" alt="Ballade" width="160" height="160">
+            <div class="desc">
+                微信
+            </div>
+        </div>
+        <div class="img">
+            <img src="data:image/png;base64,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"
+                width="160" height="160">
+            <div class="desc">
+                ETH
+            </div>
+        </div>
+        <div class="img">
+            <div class="desc">
+                你们知道的，靠爱发电没什么钱的，也没有人写开源项目是为了赚钱。<br /> 目前只买了个域名，页面还是挂在GitPages上（穷orz）
+                <br /> 一分两分那些就不要发过来的，虽然知道你是在支持我，但是还是免了
+                <br />
+            </div>
+        </div>
+        <p><br/></p>
+        <p><br/></p>
+        <p><br/></p>
+        <p><br/></p>
+        <p><br/></p>
+        <p><br/></p>
+        <p><br/></p>
+
+        <div style='
 			background:white;
 			width:100%;
 			text-align:center;
@@ -202,10 +221,9 @@
 			padding-top: 0.4em;
 			position: absolute;
 			padding-bottom: 0.4em;
-}
-	'>Gerard 2018 all right reserved/Power by Gitpage</div>
+
+	'>Gerard 2018 all right reserved/Power by Gitpage|图标采用<a href="http://iconfont.cn">iconfont.cn</a></div>
     </div>
-	
+
 
 </body>
-	
