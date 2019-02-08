@@ -1,8 +1,37 @@
 # 更新历史
 ---
 
-### V.3.1 报时更新
+### V0.3.2 报时更新
 * 增加报时功能，每小时报时一次，使用NodeSchedule进行定时推送
+
+### V0.3.1 优化
+* 将原来的使用`switch...case`获取发送URL改为使用多维数组然后`foreach`
+ 原来的：
+
+ ```javascript
+ switch(vtuber){
+  case "AIC":
+    var group1 = "xxxxxxxxx";
+    var group2 = "xxxxxxx";
+  case "Luna":
+  /*略*/
+ }
+ ```
+ 现在的：
+
+ ```javascript
+ group["AIC"]=["xxxxxx","xxxxxxx","xxxxxx"];
+ group["Luna"]=["xxxxxx","xxxxxxx"];
+ function getReply(msg,type){
+    var postdata=new Array();
+    for (var i = 0, len = groups[type].length; i < len; i++) {
+      postdata[i] = address + "group_id=" + groups[type][i] + "&message=" + encodeURIComponent(msg);
+    }
+    return postdata;
+ }
+ ```
+
+
 
 ### V0.3.0 主程序更新
 * 由于辣鸡腾讯关闭webqq接口……不得不换用docker-CoolQ……
@@ -17,11 +46,12 @@
 ### V0.2.4 格式更新
 * 将更新提示的格式由之前的
 
-  ```text
+ ```text
  xxxxx更新了：xxxxxxx
  地址：xxxxxxxxx
  更新时间：xxxxxxxxxx
-  ```
+ ```
+
  改为
 
  ```text
